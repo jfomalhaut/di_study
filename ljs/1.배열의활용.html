@@ -1,0 +1,46 @@
+<html>
+<body>
+	<button onclick="addItem('사과')">사과</button>
+	<button onclick="addItem('귤')">귤</button>
+	<button onclick="addItem('포도')">포도</button>
+	<button onclick="addItem('바나나')">바나나</button>
+	<button onclick="addItem('키위')">키위</button>
+	<div>
+		<span>장바구니 : </span>
+		<b id="count" style="color: red;">0</b>
+	</div>
+	<ul id="list"></ul>
+	<script>
+		var cart = [];
+		var list = document.getElementById('list');
+		var text = "", html = "";
+
+		function addItem(item) {
+			// 상품을 cart에 담기.
+			// 단 같은 상품은 담기지 않게 하기.
+			// 목표: cart에 상품 담고 출력하기.
+			// 심화: 상품 빼기
+			var index = cart.indexOf(item); // 배열에 item이 담겨 있을 때에는 index를 도출, 없을 때에는 -1
+			if (index === -1) { // 현재 담겨있지 않다.
+				cart.push(item);
+			}
+
+			print();
+		}
+
+		function print() {
+			html = "";
+			for(var i in cart) {
+				text = `<li>${cart[i]}<button>삭제</button></li>`;
+				html += text;
+			}
+			list.innerHTML = html;
+		}
+
+		// 숙제
+		// 1. 빼기 만들어보기.
+		// 2. 장바구니에 몇개의 상품이 담겼는지 카운팅하기.
+
+	</script>
+</body>
+</html>

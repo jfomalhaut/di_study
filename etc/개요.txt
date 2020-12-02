@@ -1,0 +1,36 @@
+커리큘럼 => 빠르게 끝내고
+실습 
+30 이론 70 실습
+2달 기간동안 메인페이지만 5 ~ 6개
+* 중점 : CSS < HTML
+골격을 잘 나누는 게 중요.
+* 레이아웃
+
+Javascript
+
+미술 js => 데셍 구조 윤곽 
+react => 포토샵, 일러스트
+babel webpack 
+
+
+[TIP]
+빨리 늘고 싶을 때
+1. 그날 진행했던 과정을 안 보고 할 수 있을 때까지 반복
+2. 자동완성 안 쓰기
+
+Javascript
+
+1. function 이용
+	1) 리턴함수
+	2) 매개변수
+	3) 전역변수/지역변수
+2. for문, if문, while문, switch case 
+3. 배열, Object (진행, 실력 향상)
+	1) 구문법에서의 사용, push, splice
+	2) 신문법에서의 사용 (react) map, concat, filter, reduce, ...문법
+4. index의 개념, (실력 향상)
+	1) slide 구현
+	2) fadeIn, Out 구현
+5. for문 + 배열(json)
+
+React
