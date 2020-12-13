@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <button onclick="addItem('사과')">사과</button>
+    <button onclick="addItem('귤')">귤</button>
+    <button onclick="addItem('포도')">포도</button>
+    <button onclick="addItem('바나나')">바나나</button>
+    <button onclick="addItem('키위')">키위</button>
+    <div>
+        <p>담긴 개수: <b id="setNumber" style="color:red">0</b> </p>
+    </div>
+    <ul id="list"></ul>
+
+    <script>
+        var cart = [];
+        var list = document.getElementById('list');
+        var text = "";
+        var html = "";
+        var count = 0;
+        var countChange = document.querySelector("#setNumber");
+
+
+        function addItem(item) {
+            var index = cart.indexOf(item); //배열에 item이 담겨 있을 때에는 index를 도출, 없을 때에는 -1
+            console.log(index)
+            if (index === -1) {
+                cart.push(item);
+                countChange.innerText = 1 + count++;
+            }
+
+            print();
+        }
+
+        function print() {
+            html = "";
+            for (var i = 0; i < cart.length; i++) {
+                text = `<li>${cart[i]}<button class="close">삭제</button></li>`;
+                html = html + text;
+            }
+
+            list.innerHTML = html;
+
+
+
+            var remove = document.querySelectorAll(".close");
+            for (var i = 0; i < remove.length; i++) {
+                remove[i].addEventListener("click", removeList);
+            }
+
+            function removeList() {
+                console.log(this);
+                var id = this.getAttribute("id");
+                cart.splice(id, 1);
+                countChange.innerText = -1 + count--;
+                print()
+
+            }
+
+        }
+
+
+
+        // 숙제
+        // 1. 빼기 만들기
+        // 2. 장바구니에 몇개의 상품이 담겼는지 카운팅하기.
+
+
+
+    </script>
+</body>
+
+</html>

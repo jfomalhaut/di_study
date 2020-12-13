@@ -1,0 +1,58 @@
+<html>
+
+<body>
+    <script>
+        // map은 수정할 때 사요.
+        //2라는 숫자를 5로 변경
+        var arr = [1, 2, 3];
+        var index = arr.indexOf(2);
+        arr[index] = 5;
+        console.log(arr);
+
+        var arr2 = ['민수', '철수', '영수'];
+
+        for (var i in arr2) {
+            if (arr2[i] === '철수') {
+                arr2[i] = '경수';
+            }
+        }
+
+        console.log(arr2);
+
+        반복문 + 조건문
+
+        //map은 내용을 바꿀때 씀
+
+
+        var newArr2 = arr2.map(item => {
+            if (item === '철수') {
+                return '경수';
+            } else {
+                return item;
+            }
+        });
+
+        var newArr2 = arr2.map(item => {
+            return item + '씨';
+
+        });
+
+
+
+        console.log(newArr2);
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

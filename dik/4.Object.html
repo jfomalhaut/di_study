@@ -1,0 +1,29 @@
+<html>
+
+<body>
+    <script>
+        var obj = {
+            id: 1,
+            name: '사과',
+            price: 1000
+        };
+
+        var arr = ['철수', '민수', obj];
+
+        console.log(obj.name);
+
+        //아래 방식으로는 다양하게 활용 가능
+        console.log(obj['name']);
+
+        test(obj);
+
+        arr[3].name
+
+        fuction test({ id, name, price }){
+            console.log(price);
+        }
+
+    </script>
+</body>
+
+</html>

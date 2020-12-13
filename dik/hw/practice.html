@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice</title>
+</head>
+
+<body>
+    <h1>World foods</h1>
+    <div id="foods__region"></div>
+
+
+
+    <script>
+
+        // 검색어 설정 기능 만들기 
+        //filter기능에는 region, name, price에 따라서 검색 하도록 설정!
+        //filter 기능
+        // - 아시아 음식 type만 남겨 html에 표시
+        // map 기능
+        // - 라따뚜이를 부기뇽으로 바꾸기
+
+
+        var foods = [
+            {
+                id: 1,
+                region: "아시아",
+                type: "한식",
+                name: "불고기",
+                price: 1000,
+                image: url("foodsImage/bulgogi.png")
+            },
+            {
+                id: 2,
+                region: "유럽",
+                type: "프랑스",
+                name: "라따뚜이",
+                price: 2000,
+                image: url("foodsImage/ratatouille.png")
+            },
+            {
+                id: 3,
+                region: "아시아",
+                type: "중식",
+                name: "짬뽕",
+                price: 1000,
+                image: url("foodsImage/seafoodSoup.png")
+            },
+            {
+                id: 4,
+                region: "아시아",
+                type: "일식",
+                name: "초밥",
+                price: 700,
+                image: url("foodsImage/sushi.png")
+            },
+            {
+                id: 5,
+                region: "유럽",
+                type: "독일",
+                name: "슈바인학세",
+                price: 1500,
+                image: url("foodsImage/swineHakse.png")
+            }
+
+        ];
+
+
+
+        // Selectors
+
+
+
+
+        function callRegion() {
+            var foodsRegion = document.querySelector('#foods__region');
+            for (var i = 0; i < foods.length; i++) {
+                var regions = foods[i].region;
+            }
+
+
+        }
+
+    </script>
+</body>
+
+</html>

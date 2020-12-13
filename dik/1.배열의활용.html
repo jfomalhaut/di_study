@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="1.배열의활용.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>과일 고르기!</h1>
+        <p class="passage">과일을 하나씩만 선택하시오.</p>
+        <p>담긴 개수: <b id="setNumber" style="color:red">0</b></p>
+        <div class="furits">
+            <img src="fruits/1.png" alt="" onclick="addItem('사과')">
+            <img src="fruits/2.png" alt="" onclick="addItem('바나나')">
+            <img src="fruits/3.png" alt="" onclick="addItem('귤')">
+            <img src="fruits/4.png" alt="" onclick="addItem('키위')">
+            <img src="fruits/5.png" alt="" onclick="addItem('포도')">
+        </div>
+
+        <div class="fruit__list">
+            <ul id="list"></ul>
+        </div>
+    </div>
+
+
+
+    <script>
+        var cart = [];
+        var list = document.getElementById('list');
+        var text = "";
+        var html = "";
+        var count = 0;
+        var countChange = document.querySelector("#setNumber");
+
+
+        function addItem(item) {
+            var index = cart.indexOf(item); //배열에 item이 담겨 있을 때에는 index를 도출, 없을 때에는 -1
+            console.log(index)
+            if (index === -1) {
+                cart.push(item);
+                countChange.innerText = 1 + count++;
+            }
+
+            print();
+        }
+
+        function print() {
+            html = "";
+            for (var i = 0; i < cart.length; i++) {
+                text = `<li>${cart[i]}<button class="close">X 삭제 </button><p id="total"></p></li>`;
+                html = html + text;
+            }
+
+            list.innerHTML = html;
+
+
+
+            var remove = document.querySelectorAll(".close");
+            for (var i = 0; i < remove.length; i++) {
+                remove[i].addEventListener("click", removeList);
+            }
+
+            function removeList() {
+                console.log(this);
+                var id = this.getAttribute("id");
+                cart.splice(id, 1);
+                countChange.innerText = -1 + count--;
+                print()
+
+            }
+
+        }
+
+
+
+        // 숙제
+        // 1. 빼기 만들기
+        // 2. 장바구니에 몇개의 상품이 담겼는지 카운팅하기.
+
+
+
+    </script>
+</body>
+
+</html>
