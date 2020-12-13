@@ -1,0 +1,86 @@
+<html>
+<head>
+	<style>
+		header#header {
+			height: 100px;
+			line-height: 100px;
+			text-align: center;
+			background: white;
+			border-bottom: 1px solid;
+			font-size: 50px;
+			font-weight: bold;
+			position: fixed;
+			left: 0; top: 0;
+			width: 100%;
+			transition: .3s;
+		}
+		header#header h1 {
+			margin: 0;
+			padding: 0;
+			text-align: center;
+			color: black;
+		}
+		section {
+			padding-top: 100px;
+		}
+
+		.active {
+			background: black !important;
+		}
+		.active h1 {
+			color: white !important;
+		}
+
+	</style>
+</head>
+<body>
+	<header id="header">
+		<h1>HEADER</h1>
+	</header>
+	<section>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+		<h1>content</h1>
+	</section>
+	<script>
+
+		var scrollTop = 0;
+		var headerStyle = document.querySelector('#header');
+		function onScroll() {
+			scrollTop = window.scrollY;
+			if (scrollTop > 0) { // 맨 위가 아닐 떄
+				headerStyle.classList.add('active');
+			} else { // 맨 위
+				headerStyle.classList.remove('active');
+			}
+		}
+
+		window.addEventListener('scroll', onScroll);
+	</script>
+</body>
+</html>

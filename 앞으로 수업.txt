@@ -1,0 +1,12 @@
+v 배열,
+v map, filter, concat
+v scroll Event / classList,
+v index,
+v 날짜
+
+slide 배너
+input 관리. (값 관리)
+json 출력 (장바구니 페이지) / 페이지 간 값 전달
+
+node API 구현,
+react 마지막에.

@@ -1,0 +1,41 @@
+<html>
+<head>
+	<style>
+		#box {
+			width: 200px;
+			height: 200px;
+			background: #bbb;
+		}
+
+		.red {
+			background: red !important;
+		}
+
+		.blue {
+			background: blue !important;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="box"></div>
+	<button onclick="change('red')">빨강</button>
+	<button onclick="change('blue')">파랑</button>
+	<script>
+		var box = document.querySelector('#box');
+
+		function change(color) {
+			// box.style.backgroundColor = color; // 우선순위가 높다.
+			box.classList.remove('red');
+			box.classList.remove('blue');
+			box.classList.add(color);
+		}
+
+
+
+		
+
+	</script>
+</body>
+</html>

@@ -24,13 +24,17 @@ Javascript
 	1) 리턴함수
 	2) 매개변수
 	3) 전역변수/지역변수
+
 2. for문, if문, while문, switch case 
+
 3. 배열, Object (진행, 실력 향상)
 	1) 구문법에서의 사용, push, splice
 	2) 신문법에서의 사용 (react) map, concat, filter, reduce, ...문법
+
 4. index의 개념, (실력 향상)
 	1) slide 구현
 	2) fadeIn, Out 구현
+	
 5. for문 + 배열(json)
 
 React
