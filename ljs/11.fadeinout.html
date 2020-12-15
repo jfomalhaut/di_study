@@ -1,0 +1,75 @@
+<html>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        height: 400px;
+        width: 100%;
+        position: relative;
+    }
+
+    .banner {
+        height: 400px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        transition: .3s;
+    }
+
+    .banner1 {
+        background: tomato;
+    }
+
+    .banner2 {
+        background: yellowgreen;
+    }
+
+    .banner3 {
+        background: skyblue;
+    }
+
+    .active {
+        opacity: 1;
+    }
+</style>
+
+
+<body>
+    <div class="container">
+        <div class="banner banner1"></div>
+        <div class="banner banner2"></div>
+        <div class="banner banner3"></div>
+    </div>
+    <button onclick="next()">
+        <h1>Next</h1>
+    </button>
+    <script>
+        var index = 0;
+        var banners = document.querySelectorAll('.banner');
+        var length = banners.length;
+
+        function next() {
+            banners[index].classList.remove('active');
+            index++;
+            index = index % length;
+            console.log(index);
+            banners[index].classList.add('active');
+
+        }
+
+        function autoPlay() {
+            clearInterval(interval);
+            interval = setInterval(() => {
+                next();
+            }, 1000);
+        }
+
+    </script>
+</body>
+
+</html>
