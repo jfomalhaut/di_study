@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+    </div>
+    <article>
+        <button id="prev">이전</button>
+        <button id="next">다음</button>
+    </article>
+
+
+    <script src="./js/element.js">
+        var boxes = all('.box');
+        var prev = one('#prev');
+        var next = one('#next');
+        var length = boxes.length;
+        var temp = 0;
+
+        var index = 0;
+
+        var animate = false;
+
+        init();
+
+        function init() {
+            boxes[index].style.left = '0%';
+        }
+
+        function nextSlide() {
+            if (animate) {
+                return;
+            }
+            animate = true;
+            temp = index;
+
+            index++;
+            index = index % length;
+            boxes[index].style.cssText = "left: 100%;";
+
+            if (boxes[index].offsetleft > 0) {
+                boxes[temp].style.cssText = "left: -100%; transition: .5s";
+                boxes[index].style.cssText = "left: 0%";
+                setTimeout(function () {
+                    animate = false;
+                }, 500);
+            }
+        }
+
+        next.addEventListener('click', nextSlide);
+
+
+
+
+
+    </script>
+</body>
+
+</html>

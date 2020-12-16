@@ -1,0 +1,67 @@
+<html>
+
+<style>
+    article {
+        padding: 10px 0;
+    }
+
+    input {
+        font-size: 20px;
+        padding: 5px 10px;
+    }
+</style>
+
+<body>
+
+    </--input tag를 쓰는 이유는 div로 하면 submit이 안됨. checkbox, radiobox, selectbox 추가적으로 공부하기-->
+    <form id="form">
+        <h1>Login</h1>
+        <article>
+            <input type="text" name="username" placeholder="username">
+        </article>
+        <article>
+            <input type="password" name="password" placeholder="password">
+        </article>
+        <input type="submit" value="로그인">
+    </form>
+
+    <script src="./js/element.js"> </script>
+    <script>
+        var username = one('#username');
+        var password = one('#password');
+        var form = one('#form');
+        var info = {
+            username: 'dlkjaas',
+            password: 'dlwns'
+        };
+
+        form.addEventListener('submit', login);
+
+        function login(e) {
+            e.preventDefault();
+            var { username, password } = form;
+
+            if (username.value === info.username && password.value === info.password) {
+                alert('you are successfully logined');
+            } else {
+                alert('Please Check your password or Id');
+                password.value = "";
+            }
+            console.log(username.value);
+            console.log(username.value);
+        }
+
+
+
+
+        // function onKeypress(ev) {
+       // console.log(ev.keycode);
+       // }
+
+
+       // username.addEventListener('keypress', onkeypress);
+
+    </script>
+</body>
+
+</html>
