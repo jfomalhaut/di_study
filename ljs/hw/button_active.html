@@ -1,0 +1,69 @@
+<html>
+<head>
+	<style>
+		.boxes {
+			display: flex;
+		}
+		.box {
+			width: 200px;
+			height: 200px;
+			background: olive;
+			margin: 0 20px;
+			transition: .3s;
+		}
+		/* .box:hover {
+			background: darkgoldenrod;
+			width: 300px;
+		} */
+		.active {
+			background: darkgoldenrod;
+			width: 300px;
+		}
+	</style>
+</head>
+<body>
+	<div class="boxes">
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<script>
+		var boxes = all('.box');
+
+		// 1. 클릭 이벤트를 만들어준다.
+		boxes.forEach((element, index) => { 
+			element.addEventListener('click', function() {
+				onClickBox(element, index);
+			});
+
+			element.addEventListener('mouseover', function() {
+				console.log('mouseover!');
+			});
+		});
+
+		// 2. 클릭을 했을 때 해당 엘레먼트에 active 클래스를 추가해준다.
+		function onClickBox(element, index) {
+			// 개별로 잡아서 삭제도 가능하다. or removeAllClass()
+			if (all('.active')[0]) all('.active')[0].classList.remove('active');
+			element.classList.add('active');
+		}
+
+		// 3. 추가하기 전에 모든 요소에서 active 클래스를 삭제한다.
+		function removeAllClass() {
+			boxes.forEach(element => {
+				element.classList.remove('active');
+			});
+		}
+
+		function one(ele) {
+			return document.querySelector(ele);
+		}
+
+		function all(ele) {
+			return document.querySelectorAll(ele);
+		}
+
+	</script>
+</body>
+</html>

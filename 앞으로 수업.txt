@@ -3,10 +3,16 @@ v map, filter, concat
 v scroll Event / classList,
 v index,
 v 날짜
+v slide 배너
+v input 관리. (값 관리)
 
-slide 배너
-input 관리. (값 관리)
 json 출력 (장바구니 페이지) / 페이지 간 값 전달
 
+react
 node API 구현,
-react 마지막에.
+
+redux,
+redux-saga (middle ware) => API 연동 (직접 만들어야 하는 api)
+node 배우시고
+시간이 남을 수 있을 때
+aws ==> 1년 월 1달러($0.55)
