@@ -34,16 +34,28 @@
         var list = document.getElementById('list');
         var text = "";
         var html = "";
-        var count = 0;
-        var countChange = document.querySelector("#setNumber");
+        var total = 0;
+        var totalCount = document.querySelector("#setNumber");
 
 
         function addItem(item) {
-            var index = cart.indexOf(item); //배열에 item이 담겨 있을 때에는 index를 도출, 없을 때에는 -1
+            var names = cart.map(item => item.name);
+            var index = names.indexOf(item); //배열에 item이 담겨 있을 때에는 index를 도출, 없을 때에는 -1
             console.log(index)
             if (index === -1) {
-                cart.push(item);
-                countChange.innerText = 1 + count++;
+                cart.push({ name: item, count: 1 });
+                totalCount.innerText = 1 + total++;
+            } else {
+                cart = cart.map((item, idx) => {
+                    if (index === idx) {
+                        return ({ ...item, count: item.count + 1 });
+
+                    } else {
+                        return item;
+
+                    }
+                })
+                totalCount.innerText = 1 + total++;
             }
 
             print();
@@ -52,7 +64,8 @@
         function print() {
             html = "";
             for (var i = 0; i < cart.length; i++) {
-                text = `<li>${cart[i]}<button class="close">X 삭제 </button><p id="total"></p></li>`;
+                text = `<li>${cart[i].name}<p id="itemCount">(${cart[i].count}개)</p>
+                <button class="close">X 삭제 </button><p id="total"></p></li>`;
                 html = html + text;
             }
 
@@ -62,15 +75,21 @@
 
             var remove = document.querySelectorAll(".close");
             for (var i = 0; i < remove.length; i++) {
-                remove[i].addEventListener("click", removeList);
+                remove[i].addEventListener("click", countDedcution);
             }
 
-            function removeList() {
-                console.log(this);
-                var id = this.getAttribute("id");
-                cart.splice(id, 1);
-                countChange.innerText = -1 + count--;
-                print()
+            function countDedcution() {
+                //console.log(this);
+                //var id = this.getAttribute("id");
+                //cart.splice(id, 1);
+
+
+                totalCount.innerText = -1 + total--;
+
+
+
+
+                //print()
 
             }
 

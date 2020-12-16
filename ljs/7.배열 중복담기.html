@@ -1,0 +1,43 @@
+<html>
+<body>
+	<button onclick="addItem('사과')">사과</button>
+	<button onclick="addItem('귤')">귤</button>
+	<ul id="itemList"></ul>
+	<script>
+		var cart = [];
+		var itemList = document.querySelector('#itemList');
+
+		function addItem(item) {
+			var names = cart.map(item => item.name); // name만 남긴 배열을 만든다.
+			var index = names.indexOf(item); // 내가 담은 상품이 카트에 이미 담겨 있는지, 그렇지 않은지를 체크해서 index 도출
+			if (index === -1) { // 안 담긴 경우
+				cart.push({ name: item, count: 1 }); // 추가.
+			} else {
+				cart = cart.map((item, idx) => { // 이미 담겨 있으므로 카운트만 '수정'한다.
+					if (index === idx) {
+						return ({ ...item, count: item.count + 1 });
+					} else {
+						return item;
+					}
+				});
+				// cart = cart.map((item, idx) => index === idx ? ({ ...item, count: item.count + 1 }) : item);
+			}
+			print();
+		}
+
+		var html, text = "";
+
+		function print() {
+			html = "";
+			for (var i in cart) {
+				text = `
+					<li>${cart[i].name}(${cart[i].count}개)<li>
+				`;
+				html += text;
+			}
+			itemList.innerHTML = html;
+		}
+		
+	</script>
+</body>
+</html>

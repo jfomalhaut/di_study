@@ -1,0 +1,89 @@
+<html>
+
+<head>
+
+    <style>
+        body {
+            display: flex;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: black;
+        }
+
+        .active {
+            width: 100px;
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div onclick="applyActive('box1')" class="box box1"></div>
+    <div onclick="applyActive('box2')" class="box box2"></div>
+    <div onclick="applyActive('box3')" class="box box3"></div>
+    <div onclick="applyActive('box4')" class="box box4"></div>
+
+
+
+    <script>
+
+        function applyActive(box) {
+
+        }
+        var boxes = document.querySelectorAll('.box');
+        for (var i = 0; i < boxes.length; i++) {
+            boxes[i].addEventListener("click", boxChange)
+        }
+
+        function boxChange() {
+            box[i].classList.add('active');
+            box[i].classList.remove('active');
+
+        }
+
+
+
+
+        /*
+                var box1 = document.querySelector('.box1');
+        
+        
+                box1.onmouseover = traitRedo1;
+                box1.onmouseenter = traitChange1;
+        
+        
+                function traitRedo1() {
+                    box1.classList.add('active');
+                }
+        
+                function traitChange1() {
+                    box1.classList.remove('active');
+                }
+        */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
