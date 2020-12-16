@@ -45,9 +45,6 @@
 		function next(){
 			banners[index].classList.remove('active');
 			index++;
-			// if (index > 2 ) {
-			// 	index = 0;
-			// }
 			index = index % length;
 			banners[index].classList.add('active');
 		}
