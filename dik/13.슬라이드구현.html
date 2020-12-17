@@ -15,51 +15,89 @@
     <article>
         <button id="prev">이전</button>
         <button id="next">다음</button>
+        <button onclick="autoPlay()">Auto Play</button>
+        <button onclick="pause()">Pause</button>
+
     </article>
 
 
-    <script src="./js/element.js">
+    <script src="./js/element.js"></script>
+    <script>
         var boxes = all('.box');
         var prev = one('#prev');
         var next = one('#next');
         var length = boxes.length;
         var temp = 0;
-
         var index = 0;
-
         var animate = false;
 
         init();
+
+
+        next.addEventListener('click', nextSlide);
+        prev.addEventListener('click', previousSlide);
+
 
         function init() {
             boxes[index].style.left = '0%';
         }
 
         function nextSlide() {
-            if (animate) {
-                return;
-            }
+            if (animate) return;
+
             animate = true;
             temp = index;
-
             index++;
             index = index % length;
             boxes[index].style.cssText = "left: 100%;";
 
-            if (boxes[index].offsetleft > 0) {
-                boxes[temp].style.cssText = "left: -100%; transition: .5s";
-                boxes[index].style.cssText = "left: 0%";
+            if (boxes[index].offsetLeft > 0) {
+                boxes[temp].style.cssText = "left: -100%; transition: .5s;";
+                boxes[index].style.cssText = "left: 0%; transition: .5s;";
                 setTimeout(function () {
                     animate = false;
                 }, 500);
             }
         }
 
-        next.addEventListener('click', nextSlide);
+
+        function previousSlide() {
+            if (animate) return;
+
+            animate = true;
+            temp = index;
+            index++;
+
+            index = length % index;
+            boxes[index].style.cssText = "left: -100%;";
+
+            if (boxes[index].offsetLeft < 0) {
+                boxes[temp].style.cssText = "left: 100%; transition: .5s;";
+                boxes[index].style.cssText = "left: 0%; transition: .5s;";
+                setTimeout(function () {
+                    animate = false;
+                }, 500);
+            }
+        }
+
+        var interval;
+        function autoPlay() {
+            clearInterval(interval);
+            interval = setInterval(() => {
+                nextSlide();
+            }, 1000);
+        }
+
+        function pause() {
+            clearInterval(interval);
+            interval = setInterval(() => {
+                init();
+            });
+        }
 
 
-
-
+		// 숙제
+		// 이전, 자동플레이, 멈춤 기능 구현해보기.
 
     </script>
 </body>

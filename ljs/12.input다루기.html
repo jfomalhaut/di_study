@@ -1,0 +1,67 @@
+<html>
+<head>
+	<style>
+		article {
+			padding: 10px 0;
+		}
+		input {
+			font-size: 20px;
+			padding: 5px 10px;
+		}
+
+	</style>
+</head>
+<body>
+	<form id="form">
+		<h1>Login</h1>
+		<article>
+			<input type="text" name="username" placeholder="username">
+		</article>
+		<article>
+			<input type="password" name="password" placeholder="password">
+		</article>
+		<input type="submit" value="로그인">
+	</form>
+
+	<script src="./js/element.js"></script>
+	<script>
+		var form = one('#form');
+		var info = {
+			username: 'dlwnssla',
+			password: 'dlwns'
+		};
+
+		form.addEventListener('submit', login);
+
+		function login(ev) {
+			ev.preventDefault();
+			var { username, password } = form;
+			if (username.value === info.username && password.value === info.password) {
+				alert('로그인 성공!');
+			} else {
+				alert('로그인 실패!');
+				password.value = "";
+			}
+		}
+
+		// 추가 학습 목표
+		// 1. select 박스에서 값 받아오기.
+		// 2. checkbox 상동 (checked 라는 항목 주의)
+		// 3. radio 상동 (checked 라는 항목 주의)
+
+
+		// function login() {
+		// 	alert('login!');
+		// }
+
+		// function onKeypress(ev) {
+		// 	if (ev.keyCode === 13) {
+		// 		login();
+		// 	}
+		// }
+
+		// // keyup, keydown, keypress
+		// username.addEventListener('keyup', onKeypress);
+	</script>
+</body>
+</html>
