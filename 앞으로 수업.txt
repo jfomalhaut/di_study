@@ -5,8 +5,7 @@ v index,
 v 날짜
 v slide 배너
 v input 관리. (값 관리)
-
-json 출력 (장바구니 페이지) / 페이지 간 값 전달
+v json 출력 (장바구니 페이지) / 페이지 간 값 전달
 
 react
 node API 구현,

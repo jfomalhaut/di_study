@@ -1,0 +1,49 @@
+<html>
+<body>
+	<div id="detail"></div>
+	<script src="./js/element.js"></script>
+	<script src="./js/items.js"></script>
+	<script>
+		
+		var params = {};
+		init();
+		var detail = document.getElementById('detail');
+		var id = getValue('id');
+		var itemInfo = pdt.filter(item => item.id === id * 1)[0];
+
+		detail.innerHTML = `
+			<div>
+				<figure>
+					<img src="img2/${itemInfo.src}">
+				</figure>
+				<article>
+					<div>${itemInfo.name}</div>
+					<div>${itemInfo.price}</div>
+				</article>	
+			</div>
+		`;
+
+		function init() {
+			var pageUrl = window.location.search.substring(1);
+			if (!pageUrl) {
+				window.location.href = '14.마켓컬리.html';
+				return;
+			}
+
+			var _params = pageUrl.split('&');
+			var row;
+
+			_params.forEach(element => {
+				row = element.split('='); // [id, 1], [price, 1000]
+				params[row[0]] = row[1];
+			});
+		}
+
+		function getValue(key) {
+			return params[key];
+		}
+
+
+	</script>
+</body>
+</html>

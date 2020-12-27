@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<style>
+		#container {
+			display: grid;
+			max-width: 1000px;
+			margin: 50px auto;
+			grid-template-columns: repeat(4, 1fr);
+			grid-gap: 20px;
+		}
+		.item img{
+			width: 100%;
+		}
+		.item article {
+			padding: 0 10px;
+		}
+		.item h3 {
+			height: 50px;
+			font-size: 20px;
+			line-height: 25px;
+		}
+		.item button{
+			width: 100%;
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="container"></div>
+	<script src="./js/element.js"></script>
+	<script src="./js/items.js"></script>
+	<script>
+		var container = document.getElementById('container');
+		var html = "", text = "";
+		container.innerHTML = print();
+
+		function print() {
+			pdt.forEach(element => {
+				text = `
+					<div class="item">
+						<a href="15.마켓컬리상세페이지.html?id=${element.id}&price=${element.price}">	
+							<img src="img2/${element.src}">
+						</a>
+						<article>
+							<h3>${element.name}</h3>
+							<h2>${element.price}</h2>
+						</article>
+						<button>CART</button>
+					</div>
+				`;
+				html += text;
+			});
+
+			return html;
+		}
+	</script>
+</body>
+</html>
