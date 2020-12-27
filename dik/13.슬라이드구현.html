@@ -68,7 +68,10 @@
             temp = index;
             index++;
 
-            index = length % index;
+            index = index % length;
+
+
+
             boxes[index].style.cssText = "left: -100%;";
 
             if (boxes[index].offsetLeft < 0) {
