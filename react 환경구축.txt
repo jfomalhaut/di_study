@@ -1,0 +1,25 @@
+
+1. package.json 생성
+	$ npm init -y 
+
+2. webpack.config.js 생성 및 작성
+	1) entry: 프로젝트의 시작점
+	2) module: 어떤 파일들을 읽어올 지
+	3) resolve: 불러올 파일들의 확장자
+	4) output: 어디에다가 압축한 파일을 출력할 지.
+	5) devServer: 웹팩 개발서버에 대한 내용
+
+3. entry 폴더 및 파일 (src/index.js) 생성
+
+4. output 폴더 및 파일 (dist/index.html) 생성
+
+5. webpack, babel, react 설치
+	npm i -D webpack webpack-cli webpack-dev-server
+	npm i -D babel-loader @babel/core @babel/preset-env @babel/preset-react
+	npm i react react-dom react-router-dom
+
+6. package.json에 babel 설정 및 script 추가
+
+7. index.js 와 index.html 설정
+
+8. .gitignore 생성 및 작성
