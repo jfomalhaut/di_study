@@ -44,12 +44,12 @@
             console.log(index)
             if (index === -1) {
                 cart.push({ name: item, count: 1 });
+
                 totalCount.innerText = 1 + total++;
             } else {
                 cart = cart.map((item, idx) => {
                     if (index === idx) {
                         return ({ ...item, count: item.count + 1 });
-
                     } else {
                         return item;
 
@@ -57,41 +57,30 @@
                 })
                 totalCount.innerText = 1 + total++;
             }
-
             print();
         }
 
         function print() {
             html = "";
             for (var i = 0; i < cart.length; i++) {
-                text = `<li>${cart[i].name}<p id="itemCount">(${cart[i].count}개)</p>
-                <button class="close">X 삭제 </button><p id="total"></p></li>`;
-                html = html + text;
+                text = `
+                <li>${cart[i].name}<p id="itemCount">(${cart[i].count}개)</p>
+                <button class="close"> X 삭제 </button>
+                <button class="minus" onClick="deduction()">빼기 </button>
+                <p id="total"></p></li>`;
+                html += text;
             }
 
             list.innerHTML = html;
+        }
 
 
 
-            var remove = document.querySelectorAll(".close");
-            for (var i = 0; i < remove.length; i++) {
-                remove[i].addEventListener("click", countDedcution);
-            }
-
-            function countDedcution() {
-                //console.log(this);
-                //var id = this.getAttribute("id");
-                //cart.splice(id, 1);
-
-
-                totalCount.innerText = -1 + total--;
-
-
-
-
-                //print()
-
-            }
+        function deduction() {
+            var minus = document.querySelectorsAll('.minus');
+            minus[i].addEventListener("click", function () {
+                totalCount--;
+            });
 
         }
 

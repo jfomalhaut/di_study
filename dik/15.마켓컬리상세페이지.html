@@ -1,0 +1,62 @@
+<html>
+
+<body>
+    <div id="detail"></div>
+
+    <script src="./js/element.js"></script>
+    <script src="./js/items.js"></script>
+    <script>
+
+        var params = {};
+        init();
+        var detail = document.getElementById('detail');
+        var id = getValue('id');
+        console.log(id);
+        var itemInfo = pdt.filter(item => item.id === id * 1)[0];
+        console.log(itemInfo);
+
+        detail.innerHTML = `
+            <div>
+                <figure>
+                    <img src="img2/${itemInfo.src}">
+                </figure>
+                <article>
+                    <div>${itemInfo.name}</div>
+                    <div>${itemInfo.price}</div>
+                </article>
+            </div>
+        `;
+
+
+
+        function init() {
+            var pageUrl = window.location.search.substring(1);
+            console.log(pageUrl);
+            if (!pageUrl) {
+                window.location.href = '14.마켓컬리.html';
+                return;
+            }
+
+
+
+            var _params = pageUrl.split('&');
+            var row;
+
+            _params.forEach(element => {
+                row = element.split('=');
+                params[row[0]] = row[1];
+
+            });
+            console.log(params);
+        }
+
+        function getValue(key) {
+            return params[key];
+        }
+
+//숙제: 카트 담기 만들어 보기
+
+    </script>
+</body>
+
+</html>

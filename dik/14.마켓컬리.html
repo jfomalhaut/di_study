@@ -1,0 +1,185 @@
+<html>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<head>
+
+
+    <style>
+        .shoping-list {
+            display: flex;
+
+
+        }
+
+        .cart-statement {
+            width: 30%;
+            padding: 30px;
+        }
+
+        .item-box {
+
+            padding: 20px;
+        }
+
+        #container {
+            display: grid;
+            max-width: 800px;
+            margin: 50px auto;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+        }
+
+        .item img {
+            width: 100%;
+        }
+
+        .item article {
+            padding: 10px;
+        }
+
+        .item h3 {
+            height: 50px;
+            font-size: 20px;
+            line-height: 25px;
+        }
+
+        .item button {
+            width: 100%;
+        }
+
+        #list {
+            padding: 0;
+        }
+
+        .cart-items {
+            list-style: none;
+            line-height: 10px;
+            margin-bottom: 20px;
+
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div class="shoping-list">
+        <div id="container"></div>
+        <div class="cart-statement">
+            <h1>Selected items</h1>
+            <div class="item-box">
+
+                <ul id="list">
+
+                </ul>
+
+                <h3>Total Price: <b id="totalPrice">0</b><b>원</b></h3>
+
+                <h3>Total Number: <b id="totalNumber">0</b><b>개</b></h3>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./js/element.js"></script>
+    <script src="./js/items.js"></script>
+    <script>
+        var nf = new Intl.NumberFormat();
+        var container = document.getElementById('container');
+        var totalNumber = document.getElementById('totalNumber');
+        var totalPrice = one('#totalPrice');
+        var _total = 0;
+        var sum = 0;
+        var itemTotal = 0;
+        var html = "", text = "";
+        var cart = [];
+        var list = document.getElementById('list');
+        console.log("진열상품들", pdt);
+        container.innerHTML = print();
+
+
+        function print() {
+            pdt.forEach(element => {
+                text = `
+                <div class="item">
+                    <a href="15.마켓컬리상세페이지.html?id=${element.id}&price=${element.price}">
+                        <img src="img2/${element.src}">
+                    </a>
+                    <article>
+                        <h3>${element.name}</h3>
+                        <h2>${nf.format(element.price)}원</h2>
+                    </article>
+                  
+                    <button onclick="addToCart(${element.id})">CART</button>
+                </div>
+                `;
+                html += text;
+            });
+            return html;
+        }
+
+        // <button onclick="addItem(${element.name}, ${element.price}, ${element.id})">CART</button>
+
+        function addToCart(id) {
+            _total = 0;
+            itemTotal = 0;
+            var item = pdt.filter(item => item.id === id)[0];
+            var ids = cart.map(item => item.id);
+            if (ids.indexOf(id) === -1) {
+                cart.push({ ...item, quantity: 1 });
+            } else {
+                cart = cart.map(item => item.id === id ? ({ ...item, quantity: item.quantity + 1 }) : item);
+            }
+
+            for (var i in cart) {
+                sum = cart[i].price * cart[i].quantity;
+                _sum = cart[i].quantity;
+                itemTotal += _sum;
+                _total += sum;
+            }
+
+            cartItems();
+            totalPrice.innerHTML = nf.format(_total);
+            totalNumber.innerHTML = itemTotal;
+
+
+
+
+
+            // const _total = cart.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
+        }
+
+        function cartItems() {
+            html = "";
+            for (var i = 0; i < cart.length; i++) {
+                text = `
+                <li class="cart-items">
+                    <b>${cart[i].name}</b><br>
+                    <p>개당 가격: ${cart[i].price}원</p><br>
+                    <p id="itemCount">x${cart[i].quantity}</p>
+                <button onClick="delete()"> X 삭제 </button>
+                <button onClick="deduction(id)">빼기 </button>
+                </li>
+                `;
+                html += text;
+            }
+
+            list.innerHTML = html;
+
+        }
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+
+</html>
