@@ -13,6 +13,7 @@
 	<article>
 		<button id="prev">이전</button>
 		<button id="next">다음</button>
+		<button id="auto">자동시작</button>
 	</article>
 
 	<script src="./js/element.js"></script>
@@ -20,12 +21,15 @@
 		var boxes = all('.box');
 		var prev = one('#prev');
 		var next = one('#next');
+		var auto = one('#auto');
 		var length = boxes.length;
 		var temp = 0;
 		var index = 0;
 		var animate = false;
+		var interval;
 
 		init();
+		autoplay();
 
 		function init() {
 			boxes[index].style.left = '0%';
@@ -49,7 +53,16 @@
 			}
 		}
 
+		function autoplay() {
+			clearInterval(interval);
+			interval = setInterval(function() {
+				nextSlide();
+			}, 1000);
+		}
+		
+
 		next.addEventListener('click', nextSlide);
+		auto.addEventListener('click', autoplay);
 
 		// 숙제
 		// 이전, 자동플레이, 멈춤 기능 구현해보기.

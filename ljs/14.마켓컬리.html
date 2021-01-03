@@ -27,12 +27,20 @@
 	</style>
 </head>
 <body>
+	<h1>
+		합계 : <b id="total">0</b>원
+	</h1>
 	<div id="container"></div>
 	<script src="./js/element.js"></script>
 	<script src="./js/items.js"></script>
 	<script>
+		var nf = new Intl.NumberFormat();
 		var container = document.getElementById('container');
+		var total = one('#total');
+		var _total = 0;
+		var sum = 0;
 		var html = "", text = "";
+		var cart = [];
 		container.innerHTML = print();
 
 		function print() {
@@ -44,9 +52,9 @@
 						</a>
 						<article>
 							<h3>${element.name}</h3>
-							<h2>${element.price}</h2>
+							<h2>${nf.format(element.price)}원</h2>
 						</article>
-						<button>CART</button>
+						<button onclick="addToCart(${element.id})">CART</button>
 					</div>
 				`;
 				html += text;
@@ -54,6 +62,27 @@
 
 			return html;
 		}
+
+		function addToCart(id) {
+			_total = 0;
+			var item = pdt.filter(item => item.id === id)[0];
+			var ids = cart.map(item => item.id);
+			if (ids.indexOf(id) === -1) {
+				cart.push({ ...item, quantity: 1 });
+			} else {
+				cart = cart.map(item => item.id === id ? ({ ...item, quantity: item.quantity + 1 }) : item);
+			}
+			
+			for (var i in cart) {
+				sum = cart[i].price * cart[i].quantity;
+				_total += sum;
+			}
+
+			total.innerHTML = nf.format(_total);
+
+			// const _total = cart.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
+		}
+
 	</script>
 </body>
 </html>

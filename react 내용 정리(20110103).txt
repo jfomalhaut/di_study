@@ -1,0 +1,26 @@
+
+1. 페이지 이동
+	1) App.js에서 BrowserRouter, Switch, Route를 만들고, Route에 component를 연결한다.
+	2) 페이지 이동에는 두 가지 방법이 있는데, 하나는 Link 태그를 사용하는 방법, (a태그의 href)
+	3) Route로부터 상속받은 props의 history를 사용하는 방법이다. (window.location.href)
+
+2. 값 다루기 (useState)
+	1) useState에서의 첫번째 인자는 값, 두 번째 인자는 첫번째 인자인 값을 변경할 때 사용된다.
+	2) 어떠한 상황에서도 첫번재 인자는 두 번째 인자를 통해서만 변경이 가능하다. 예외는 없다.
+	3) useState의 값은 input태그나 기타 값들과 연동될 수 있다.
+
+3. 값 감시하기 (useEffect)
+	1) useEffect의 용도는 크게 두 가지이다.
+	2) 첫 번째는 처음 페이지가 랜더링될 때,
+	3) 두 번째는 특정 값을 감시하여, 그 값이 바뀔 때마다 이벤트를 작동시키는 것이다.
+
+4. input태그 사용하기
+	1) input태그의 값은 useState의 값과 연동할 수 있다.
+	2) 값을 입력한다 => onChange함수가 작동한다 => 해당 함수에서 value를 useState의 두 번째 인자로 변경한다 => 값이 바뀐다.
+		위와 같은 로직으로 input 태그의 값은 변경된다.
+	3) 해당 과정은 대다수의 태그에서 동일하게 적용된다. (checkbox, radio, select 등)
+
+5. React의 룰
+	1) 어떤 method나 component를 사용할 때는 반드시 import해서 사용해야 한다.
+	2) export와 export default의 차이를 이해해야 한다.
+	3) 부모 component에서 자식 component로 값을 전해줄 수 있는데, 그것은 props의 자리에서 받을 수 있다.
