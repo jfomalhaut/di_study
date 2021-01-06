@@ -2,17 +2,28 @@ import React, { useEffect, useState } from 'react';
 
 const Counter = () => {
     const [count, setCount] = useState(0);
+    const [change, setChange] = useState(0);
+
     //useState의 0은 초깃값
 
     //useState 사용하기.
 
+    const onChangeCount = (ev) => {
+        const { target: { value } } = ev;
+        setChange(value);
+    }
+
     const increasement = () => {
-        setCount(count + 1);
+        const increase = count + change;
+        setCount(increase);
 
     };
+
     const decreasement = () => {
-        setCount(count - 1);
+        const decrease = count - change;
+        setCount(decrease);
     };
+
 
 
 
@@ -39,7 +50,7 @@ const Counter = () => {
     return (
         <div>
             <h1>{count}</h1>
-            <input type="number" />
+            <input value={change} onChange={onChangeCount} type="number" />
             <button onClick={decreasement}>감소</button>
             <button onClick={increasement}>증가</button>
 

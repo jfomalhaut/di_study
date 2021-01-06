@@ -23,6 +23,17 @@ const Phonebook = () => {
         setPhonenumber(value);
     }
 
+    const register = () => {
+        const active = document.querySelector('.active');
+        const profile = `
+        <h1>name: ${name}</h1>
+        <h1>job: ${job}</h1>
+        <h1>phone: ${phonenumber}</h1>
+         `;
+        active.innerHTML = profile;
+    }
+
+
 
 
     return (
@@ -30,12 +41,10 @@ const Phonebook = () => {
             <input value={name} onChange={onChangeName} placeholder="이름" />
             <input value={job} onChange={onChangeJob} placeholder="직업" />
             <input value={phonenumber} onChange={onChangePhone} placeholder="전화번호" />
-            <button>등록</button>
+            <button onClick={register}>등록</button>
 
-            <div>
-                <h1>Name: {name}</h1>
-                <h1>Job: {job}</h1>
-                <h1>Phone: {phonenumber}</h1>
+            <div className="active">
+
             </div>
 
         </div>

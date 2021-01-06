@@ -96,6 +96,7 @@
         var cart = [];
         var list = document.getElementById('list');
         console.log("진열상품들", pdt);
+
         container.innerHTML = print();
 
 
@@ -139,18 +140,13 @@
                 _total += sum;
             }
 
-            cartItems();
+            cartItems(id);
             totalPrice.innerHTML = nf.format(_total);
             totalNumber.innerHTML = itemTotal;
-
-
-
-
-
             // const _total = cart.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
         }
 
-        function cartItems() {
+        function cartItems(id) {
             html = "";
             for (var i = 0; i < cart.length; i++) {
                 text = `
@@ -158,8 +154,8 @@
                     <b>${cart[i].name}</b><br>
                     <p>개당 가격: ${cart[i].price}원</p><br>
                     <p id="itemCount">x${cart[i].quantity}</p>
-                <button onClick="delete()"> X 삭제 </button>
-                <button onClick="deduction(id)">빼기 </button>
+                <button onClick="deleteItem(${id})"> X 삭제 </button>
+                <button onClick="deduction(${id})">빼기 </button>
                 </li>
                 `;
                 html += text;
@@ -168,10 +164,33 @@
             list.innerHTML = html;
 
         }
+        function deduction(id) {
+            var itemCount = document.getElementById('itemCount');
+            _total = 0;
+            itemTotal = 0;
+            var item = pdt.filter(item => item.id === id)[0];
+            var ids = cart.map(item => item.id);
+            if (ids.indexOf(id) !== -1) {
+                cart = cart.map(item => item.id === id ? ({ ...item, quantity: item.quantity - 1 }) : item);
+            }
 
+            for (var i in cart) {
+                var minusOne = cart[i].quantity;
+                sum = cart[i].price * minusOne;
+                _sum = minusOne;
+                itemTotal += _sum;
+                _total += sum;
+            }
 
+            if (_total < 0 && itemTotal < 0) {
+                _total = 0;
+                itemTotal = 0;
+            }
 
-
+            totalPrice.innerHTML = nf.format(_total);
+            totalNumber.innerHTML = itemTotal;
+            // const _total = cart.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
+        }
 
 
 
