@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 function Page1(props) {
     const { history } = props;
+    //history는 내장 함수
     const [name, setName] = useState("");
 
 
