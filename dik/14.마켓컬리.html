@@ -77,6 +77,8 @@
                 <h3>Total Price: <b id="totalPrice">0</b><b>원</b></h3>
 
                 <h3>Total Number: <b id="totalNumber">0</b><b>개</b></h3>
+
+                <button onclick=deleteAll()>전체 지우기</button>
             </div>
         </div>
     </div>
@@ -97,10 +99,10 @@
         var list = document.getElementById('list');
         console.log("진열상품들", pdt);
 
-        container.innerHTML = print();
+        container.innerHTML = init();
 
 
-        function print() {
+        function init() {
             pdt.forEach(element => {
                 text = `
                 <div class="item">
@@ -126,37 +128,34 @@
             _total = 0;
             itemTotal = 0;
             var item = pdt.filter(item => item.id === id)[0];
+            console.log('item:', item); //선택된 과일 호출
             var ids = cart.map(item => item.id);
+            console.log('ids:', ids);//선택된 과일들을 id로 호출
             if (ids.indexOf(id) === -1) {
                 cart.push({ ...item, quantity: 1 });
             } else {
                 cart = cart.map(item => item.id === id ? ({ ...item, quantity: item.quantity + 1 }) : item);
             }
 
-            for (var i in cart) {
-                sum = cart[i].price * cart[i].quantity;
-                _sum = cart[i].quantity;
-                itemTotal += _sum;
-                _total += sum;
-            }
+            print();
 
-            cartItems(id);
-            totalPrice.innerHTML = nf.format(_total);
-            totalNumber.innerHTML = itemTotal;
             // const _total = cart.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
         }
 
-        function cartItems(id) {
+        function print() {
+            // cart배열 구조가 최종적으로 결정이 난 상태이므로
+            calc();
+
             html = "";
             for (var i = 0; i < cart.length; i++) {
                 text = `
-                <li class="cart-items">
-                    <b>${cart[i].name}</b><br>
-                    <p>개당 가격: ${cart[i].price}원</p><br>
-                    <p id="itemCount">x${cart[i].quantity}</p>
-                <button onClick="deleteItem(${id})"> X 삭제 </button>
-                <button onClick="deduction(${id})">빼기 </button>
-                </li>
+                    <li class="cart-items">
+                        <b>${cart[i].name}</b><br>
+                        <p>개당 가격: ${cart[i].price}원</p><br>
+                        <p>x${cart[i].quantity}</p>
+                        <button onClick="deleteItem(${cart[i].id})"> X 삭제 </button>
+                        <button onClick="deduction(${cart[i].id})">빼기 </button>
+                    </li>
                 `;
                 html += text;
             }
@@ -165,34 +164,44 @@
 
         }
         function deduction(id) {
-            var itemCount = document.getElementById('itemCount');
+            cart = cart.map(item =>
+                item.id === id ? ({ ...item, quantity: item.quantity - 1 }) : item)
+                .filter(item => item.quantity > 0);// item이 0보다 큰것만 남긴다.
+            console.log("빼기:", cart)
+            print();
+        }
+
+        function calc() {
             _total = 0;
-            itemTotal = 0;
-            var item = pdt.filter(item => item.id === id)[0];
-            var ids = cart.map(item => item.id);
-            if (ids.indexOf(id) !== -1) {
-                cart = cart.map(item => item.id === id ? ({ ...item, quantity: item.quantity - 1 }) : item);
-            }
-
+            _quantity = 0;
             for (var i in cart) {
-                var minusOne = cart[i].quantity;
-                sum = cart[i].price * minusOne;
-                _sum = minusOne;
-                itemTotal += _sum;
-                _total += sum;
-            }
-
-            if (_total < 0 && itemTotal < 0) {
-                _total = 0;
-                itemTotal = 0;
+                _total = _total + cart[i].price * cart[i].quantity;
+                _quantity = _quantity + cart[i].quantity;
             }
 
             totalPrice.innerHTML = nf.format(_total);
-            totalNumber.innerHTML = itemTotal;
-            // const _total = cart.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
+            totalNumber.innerHTML = _quantity;
+        }
+
+        function deleteItem(id) {
+            cart = cart.map(item => item.id === id ? splice(cart.id) : item)
+            console.log(cart);
+            print();
+
+        }
+
+        function deleteAll() {
+            for (var i in cart) {
+                cart = cart.splice(cart[i].id)
+            }
+            print();
+            console.log(cart);
         }
 
 
+        // 카트가 바뀐다(addToCart, deduction) => 
+        // 화면 출력(print) => 
+        // 최종 금액 및 수량 설정 (calc)
 
 
 
