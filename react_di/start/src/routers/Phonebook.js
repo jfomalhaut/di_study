@@ -1,52 +1,28 @@
 import React, { useState } from 'react';
 import { PhonebookItem } from '../components';
 
+
+//정보가 들어가야할 field 구성
 const field = {
     name: '',
     job: '',
     phonenumber: '',
 }
 
-const Phonebook = () => {
-    // const [name, setName] = useState("");
-    // const [job, setJob] = useState("");
-    // const [phonenumber, setPhonenumber] = useState("");
 
-    const [info, setInfo] = useState(field);
-    const [list, setList] = useState([]);
-    const { name, job, phonenumber } = info;
+const Phonebook = () => {
+    const [info, setInfo] = useState(field); //info를 field형식으로 넣고, setInfo를 통해서 filed의 빈값 채워주기
+    const [list, setList] = useState([]); // list를 배열([])형식으로 useState이용해서 setList 로 list 변경해주기.
+    const { name, job, phonenumber } = info; // input의 value값에 새겨질 것들를 info로 묶어준다.
+
     //job, phone number 등록 할떄 뜰수록 구동하기 숙제!!!!!!
 
     const onChangeValue = (ev) => {
         const { target: { value, name } } = ev;
         //setName(value);
-        const newInfo = {
-            ...info,
-            [name]: value
-        };
+        const newInfo = { ...info, [name]: value };
         setInfo(newInfo);
-
     };
-
-    // const onChangeJob = (ev) => {
-    //     const { target: { value } } = ev;
-    //     setJob(value);
-    // }
-
-    // const onChangePhone = (ev) => {
-    //     const { target: { value } } = ev;
-    //     setPhonenumber(value);
-    // }
-
-    // const register = () => {
-    //     const active = document.querySelector('.active');
-    //     const profile = `
-    //     <h1>name: ${name}</h1>
-    //     <h1>job: ${job}</h1>
-    //     <h1>phone: ${phonenumber}</h1>
-    //      `;
-    //     active.innerHTML = profile;
-    // }
 
     const register = (ev) => {
         ev.preventDefault();
@@ -66,15 +42,13 @@ const Phonebook = () => {
                 <button>등록</button>
             </form>
 
-
-
             <section>
                 {list.map((item, idx) => (
                     <PhonebookItem item={item} key={`PHONEBOOK${idx}`} />
                 ))}
 
-            </section>
 
+            </section>
         </div >
     );
 };
