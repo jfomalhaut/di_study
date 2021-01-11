@@ -184,7 +184,7 @@
         }
 
         function deleteItem(id) {
-            cart = cart.map(item => item.id === id ? splice(cart.id) : item)
+            cart = cart.map(item => item.id === id ? (cart.splice(cart.id)) : item).filter(item => item.quantity > 0);
             console.log(cart);
             print();
 

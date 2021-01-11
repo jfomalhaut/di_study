@@ -1,5 +1,5 @@
 import React from 'react';
-import Address from '../routers/Address';
+
 
 const AddressList = ({ item: { roadAddr } }) => {
     return (
@@ -9,4 +9,4 @@ const AddressList = ({ item: { roadAddr } }) => {
     );
 };
 
-export default Address;
+export default AddressList;

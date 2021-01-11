@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import { AddressList } from '../components';
+// import { AddressList } from '../components';
 import Axios from 'axios';
 
 const URL = 'https://www.juso.go.kr/addrlink/addrLinkApi.do';
 const KEY = 'devU01TX0FVVEgyMDIxMDEwODA3MzUxNzExMDY0MTY=';
 const countPerPage = 10;
 
-const field = {
-    roadAddr: ''
-}
-
-
+// const field = {
+//     roadAddr: '',
+// }
 const Address = () => {
-    const [keyword, setKeyword] = useState(field);
-    const [list, setList] = useState([]);
-    const { roadAddr } = keyword;
+    const [keyword, setKeyword] = useState('');
+    //const [list, setList] = useState([]);
+    //const { roadAddr } = keyword;
 
     const search = () => {
         Axios.get(`${URL}?confmKey=${KEY}&currentPage=1&countPerPage=${countPerPage}&resultType=json&keyword=${keyword}`)
@@ -22,14 +20,14 @@ const Address = () => {
                 const {
                     data:
                     {
-                        results: { common: { totalCount }, juso },
-                    }
+                        results: { common: { totalCount }, juso } }
                 } = res;
 
                 console.log("totalCount", totalCount);
                 console.log("주소", juso);
-
                 console.log(res);
+
+
             }).catch(error => {
                 console.log(error);
             });
@@ -37,24 +35,32 @@ const Address = () => {
 
 
 
+
     const onSearch = (ev) => {
         ev.preventDefault();
         search();
-        setList([...list, keyword])
+        setList([...list, keyword]);
+        setKeyword(field);
 
 
+    }
+
+    const onChangeKeyword = (ev) => {
+        setKeyword(ev.target.value);
     }
     return (
         <div>
             <form onSubmit={onSearch}>
-                <input value={keyword} onChange={(ev) => setKeyword(ev.target.value)} placeholder="검색어를 입력하세요." />
+                <input value={keyword} onChange={onChangeKeyword} placeholder="검색어를 입력하세요." />
                 <button>검색</button>
             </form>
 
             <section>
-                {list.map((item.idx) => (
+
+
+                {/* {list.map((item, idx) => (
                     <AddressList item={item} key={`ADDRESS${idx}`} />
-                ))}
+                ))} */}
 
             </section>
         </div>
