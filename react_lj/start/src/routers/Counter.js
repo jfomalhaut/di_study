@@ -2,9 +2,20 @@ import React, { useEffect, useState } from 'react';
 
 const Counter = () => {
 	const [count, setCount] = useState(0);
+	const [change, setChange] = useState('');
 
-	const increasement = () => {
-		setCount(count + 1);
+	// const increasement = () => {
+	// 	setCount(count + 1);
+	// };
+
+	const onChangeCount = (ev) => {
+		const { target: { value } } = ev;
+		setChange(value);
+	}
+
+	const increasement = (value) => {
+		const increase = count + change * 1;
+		setCount(increase);
 	};
 	
 	const decreasement = () => {
@@ -31,6 +42,7 @@ const Counter = () => {
 	return (
 		<div>
 			<h1>{count}</h1>
+			<input value={change} onChange={onChangeCount} type="number" />
 			<button onClick={decreasement}>감소</button>
 			<button onClick={increasement}>증가</button>
 		</div>
