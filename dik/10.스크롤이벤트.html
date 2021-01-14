@@ -6,19 +6,36 @@
             height: 100px;
             line-height: 100px;
             text-align: center;
-            background: white;
+            background: black;
+            color: white;
             border-bottom: 1px solid;
-            color: black;
             font-size: 50px;
             font-weight: bold;
             position: fixed;
             left: 0;
             top: 0;
             width: 100%;
+            transition: .3s;
+        }
+
+        header#header h1 {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: white;
         }
 
         section {
             padding-top: 100px;
+        }
+
+        .active {
+            background: white !important;
+            color: black;
+        }
+
+        .active h1 {
+            color: black !important;
         }
     </style>
 </head>
@@ -85,16 +102,20 @@
     </header>
     <script>
         var scrollTop = 0;
-        var headerStyle = document.querySelector('header');
-        window.addEventListener('scroll', onScroll);
+        var headerStyle = document.querySelector('#header');
+
 
         function onScroll() {
             scrollTop = window.scrollY;
             console.log(scrollTop);
 
-            headerStyle.style.backgroundColor = 'black';
-            headerStyle.style.color = 'white';
+            if (scrollTop > 0) {
+                headerStyle.classList.add('active');
+            } else {
+                headerStyle.classList.remove('active');
+            }
         }
+        window.addEventListener('scroll', onScroll);
 
     </script>
 
