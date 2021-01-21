@@ -7,7 +7,7 @@ const countPerPage = 10;
 
 const Address = () => {
 	const [keyword, setKeyword] = useState("");
-	const [keyword2, setKeyword2] = useState("");
+	const [keyword2, setKeyword2] = useState(null);
 	const [list, setList] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -27,6 +27,8 @@ const Address = () => {
 			resultType: 'json',
 			keyword: keyword2
 		});
+
+		console.log(payload);
 
 		Axios.get(`${URL}?${payload}`).then(res => {
 			const {
@@ -48,7 +50,7 @@ const Address = () => {
 
 	// 사용자가 검색 버튼을 누른 경우.
 	useEffect(() => {
-		if (keyword2 !== '') {
+		if (keyword2) {
 			if (currentPage === 1) {
 				search();
 			} else {
@@ -58,7 +60,7 @@ const Address = () => {
 	}, [keyword2]);
 
 	useEffect(() => {
-		if (keyword2 !== '') {
+		if (keyword2) {
 			search();
 		}
 	}, [currentPage]);
