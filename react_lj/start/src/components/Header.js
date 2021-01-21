@@ -11,6 +11,9 @@ const Header = () => {
 
 	useEffect(() => {
 		window.addEventListener('scroll', onScroll);
+		// 뒷정리 함수.
+		// 사용하는 이유: 가상돔이기 때문에 뒷정리를 해주지 않으면,
+		// 사용하는 내내 eventListener가 돌게 된다.
 		return () => {
 			window.removeEventListener('scroll', onScroll);
 		}
