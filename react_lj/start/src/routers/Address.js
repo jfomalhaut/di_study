@@ -28,8 +28,6 @@ const Address = () => {
 			keyword: keyword2
 		});
 
-		console.log(payload);
-
 		Axios.get(`${URL}?${payload}`).then(res => {
 			const {
 				data: {
