@@ -2,15 +2,28 @@ import React, { useReducer, useState } from 'react';
 
 const REGEX_ONLY_NUMBER = /[0-9]$/;
 
+
+
+// 일의 정의
+const INCREASEMENT = 'INCREASEMENT';
+const DECREASEMENT = 'DECREASEMENT';
+const INPUT = 'INPUT';
+
+// Actions 일을 시키는 행위
+const onIncreasement = () => ({ type: INCREASEMENT });
+const onDecreasement = () => ({ type: DECREASEMENT });
+const onInput = (add) => ({ type: INPUT, addNumber: add });
+
+// 하청, 일을 직접적으로 하는 주체
 const CounterReducer = (state, action) => {
 	switch (action.type) {
-		case 'INCREASEMENT': {
+		case INCREASEMENT: {
 			return state + 1;
 		}
-		case 'DECREASEMENT': {
+		case DECREASEMENT: {
 			return state - 1;
 		}
-		case 'INPUT': {
+		case INPUT: {
 			return state + action.addNumber * 1;
 		}
 		default: {
@@ -24,11 +37,11 @@ const Counter2 = () => {
 	const [add, setAdd] = useState('');
 
 	const addInputNumber = () => {
-		dispatch({ type: 'INPUT', addNumber: add });
+		dispatch(onInput(add));
 	};
 
 	const increasement = () => {
-		dispatch({ type: 'INCREASEMENT' });
+		dispatch(onIncreasement());
 	};
 
 	const onChangeNumber = (ev) => {
