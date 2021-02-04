@@ -1,0 +1,38 @@
+
+1. 개발환경 구축하기
+	1) babel
+	2) webpack (dev-server)
+	3) react
+	++ 
+	4) styled-components
+	5) axios
+
+2. hook (Functional Component)
+	1) useState (o)
+	2) useEffect (o)
+	3) useRef
+	4) useReducer
+	5) useContext
+	6) useCallback
+	7) useMemo
+
+3. custom hook
+	1) 자체적으로 만드는 hook 기법 (O)
+
+4. Redux
+	* global state, 많이 사용되는 곳: login, cart
+	+ middle ware 
+	+ 중간에 서버를 갔다가 돌아오는 미들웨어 => (saga), thunk
+	+ redux에 담긴 데이터가 유지되는 기능 persist (LocalStorage와 동일)
+	+ 1) 장바구니 구현  2) 로그인 구현
+
+5. nodejs (API 만들기)
+	1) passport 인증시스템
+	2) 로그인 및 로그아웃 인증 시스템
+	* cookie, session
+
+6. 개인 프로젝트, 혹은 커스텀
+
+
+쇼핑몰 (장바구니 담기, 로그인 처리)
+typescript => 작성 과정에서 오류를 잡아내는.
