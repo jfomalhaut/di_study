@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 const nf = new Intl.NumberFormat();
 
-const ProductItem = ({ item, onCheck, onDelete }) => {
+const ProductItem = ({ item, onCheck, onDelete, onAdd }) => {
 
     const { id, type, name, price, check } = item;
 
@@ -16,6 +16,7 @@ const ProductItem = ({ item, onCheck, onDelete }) => {
                 {name}
             </h1>
             <div>{nf.format(price)}원</div>
+            <button onClick={() => onAdd(id)}>1개 담기</button>
             <button onClick={() => onDelete(id)}>삭제</button>
         </Item>
 

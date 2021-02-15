@@ -15,3 +15,22 @@ redux-saga (middle ware) => API 연동 (직접 만들어야 하는 api)
 node 배우시고
 시간이 남을 수 있을 때
 aws ==> 1년 월 1달러($0.55)
+
+전망
+
+0. PHP
+1. jQuery 각광 => 죽은 언어 => JS를 쉽게 쓰기 위해 생김. ==> 다양한 기능
+2. 웹사이트 발전 => javscript => vanilla upgarde
+3. React => php 근본없음 => 오래된 회사 (연봉)
+4. 근본 => JavaScript(달란트 확장) => React & Vue 소모
+
+Angular => React => RN 
+3천 (고졸, 대학휴학 중퇴)
+1년만에 4천
+
+PHP 기업
+시스템 > 개발자
+
+React, Vue 회사
+시스템 < 개발자
+=> 개발자 성장하기도 더 좋은 것 같은

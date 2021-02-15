@@ -1,22 +1,20 @@
 import React, { useReducer, useState } from 'react';
 
 const REGEX_ONLY_NUMBER = /[0-9]$/;
-// /^[0-9]$/
 
 
-//일의 정의
+
+// 일의 정의
 const INCREASEMENT = 'INCREASEMENT';
 const DECREASEMENT = 'DECREASEMENT';
 const INPUT = 'INPUT';
 
-
-//Actions
+// Actions 일을 시키는 행위
 const onIncreasement = () => ({ type: INCREASEMENT });
 const onDecreasement = () => ({ type: DECREASEMENT });
 const onInput = (add) => ({ type: INPUT, addNumber: add });
 
-
-//하청 주는것.
+// 하청, 일을 직접적으로 하는 주체
 const CounterReducer = (state, action) => {
     switch (action.type) {
         case INCREASEMENT: {
@@ -28,7 +26,6 @@ const CounterReducer = (state, action) => {
         case INPUT: {
             return state + action.addNumber * 1;
         }
-
         default: {
             return state;
         }
@@ -36,16 +33,16 @@ const CounterReducer = (state, action) => {
 };
 
 const Counter2 = () => {
-    const [count, dispatch] = useReducer(Reducer, 0);
+    const [count, dispatch] = useReducer(CounterReducer, 0);
     const [add, setAdd] = useState('');
 
     const addInputNumber = () => {
         dispatch(onInput(add));
-    }
+    };
 
     const increasement = () => {
-        dispatch(onIncreasement());
-    }
+        dispatch({ type: 'INCREASEMENT' });
+    };
 
     const decreasement = () => {
         dispatch({ type: 'DECREASEMENT' });
@@ -55,7 +52,7 @@ const Counter2 = () => {
         const { target: { value } } = ev;
         if (!REGEX_ONLY_NUMBER.test(value)) return;
         setAdd(value);
-    }
+    };
 
     return (
         <div>
@@ -65,9 +62,11 @@ const Counter2 = () => {
             <button onClick={decreasement}>decreasement</button>
             <button onClick={addInputNumber}>addInputNumber</button>
         </div>
-    )
-}
+    );
+};
+
+export default Counter2;
+
 
 //카트 담기
 
-export default Counter2
