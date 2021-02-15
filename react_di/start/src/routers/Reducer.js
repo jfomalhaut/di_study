@@ -1,6 +1,8 @@
 import React, { useReducer, useState } from 'react';
 
 const REGEX_ONLY_NUMBER = /[0-9]$/;
+// /^[0-9]$/
+
 
 //일의 정의
 const INCREASEMENT = 'INCREASEMENT';
