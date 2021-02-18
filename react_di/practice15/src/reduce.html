@@ -1,0 +1,23 @@
+
+
+<html>
+<body>
+	<script>
+		const arr = [
+			{id: 1, name: 'apple', price: 2000, quantity: 2 },
+			{id: 2, name: 'banana', price: 3500, quantity: 5 },
+			{id: 3, name: 'kiwi', price: 1000, quantity: 12 },
+			{id: 4, name: 'cherry', price: 13000, quantity: 3 },
+		];
+
+		const total = arr.reduce((acc, cur) => {
+			console.log('가격 :', cur.price, '수량: ', cur.quantity);
+			console.log(acc);
+			console.log('======================================')
+			return acc + cur.price * cur.quantity;
+		}, 0);
+
+		document.write(total);
+	</script>
+</body>
+</html>

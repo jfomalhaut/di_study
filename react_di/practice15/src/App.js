@@ -1,71 +1,59 @@
 import React, { useEffect, useState } from 'react'
 import Items from './items.json'
-
 import { Container, Cart, CartHeader, CartList, CartItem, ItemTotal, Products, Product } from './AppElements';
+
+const NumberRegex = /[0-9]$/;
 
 const App = () => {
 
-    const [cart, setCart] = useState([]);
     const [list, setList] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [totalItems, setTotalItems] = useState(0);
-    // const [input, setInput] = useState(item.quantity);
-
 
     const onAdd = (id) => {
         const selectedItem = Items.filter(item => item.id === id)[0]
-        let ids = cart.map(item => item.id);
+        let ids = list.map(item => item.id);
         if (ids.indexOf(id) === -1) {
-            const newCart = cart.concat({ ...selectedItem, quantity: 1 });
-            setCart(newCart)
+            const newCart = list.concat({ ...selectedItem, quantity: 1 });
             setList(newCart)
         } else {
-            const newCart = cart.map(item => item.id === id ? ({ ...selectedItem, quantity: item.quantity + 1 }) : item);
-            setCart(newCart)
+            const newCart = list.map(item => item.id === id ? ({ ...selectedItem, quantity: item.quantity + 1 }) : item);
             setList(newCart)
         }
-    }
-
-    // const onChangeHandler = (e) => {
-    //     setInput(e.target.value);
-
-
-    // };
+    };
 
     const onDeleteItem = (id) => {
-        const deleteItem = cart.filter(item => item.id !== id);
-        setCart(deleteItem)
+        const deleteItem = list.filter(item => item.id !== id);
         setList(deleteItem)
-    }
+    };
 
     const onDeleteAll = () => {
-        setCart([])
         setList([])
-    }
+    };
 
     useEffect(() => {
+        const total = list.reduce((acc, cur, idx) => (acc + cur.price * cur.quantity), 0);
+        setTotalPrice(total);
+    }, [list]);
 
+    // useEffect(() => {
+    //     let items = 0;
+    //     let price = 0;
 
-        console.log(cart)
-        // console.log(list)
-    }, [cart, list])
+    //     cart.forEach((item) => {
+    //         items += item.quantity;
+    //         price += item.quantity * item.price;
+    //     });
 
+    //     setTotalItems(items);
+    //     setTotalPrice(price);
+    // }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
 
-    useEffect(() => {
-        let items = 0;
-        let price = 0;
-
-        cart.forEach((item) => {
-            items += item.quantity;
-            price += item.quantity * item.price;
-        });
-
-        setTotalItems(items);
-        setTotalPrice(price);
-    }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
-
-
-
+    const onChangeHandler = (e, id) => {
+        const { target: { value } } = e;
+        if (!NumberRegex.test(value * 1)) return;
+        const newList = list.map(item => item.id === id ? ({ ...item, quantity: value }) : item);
+        setList(newList);
+    };
 
     return (
         <Container>
@@ -82,7 +70,7 @@ const App = () => {
                                     min="1"
                                     type="number"
                                     value={item.quantity}
-                                // onChange={onChangeHandler}
+                                    onChange={(ev) => onChangeHandler(ev, item.id)}
                                 />
                                 <b>개</b>
                             </div>
@@ -95,7 +83,7 @@ const App = () => {
                     ))}
                 </CartList>
                 <ItemTotal>
-                    <h2>총 합계: {totalItems} 개</h2>
+                    <h2>총 합계: {list.length} 개</h2>
                     <h2>총 액수: {totalPrice} 원</h2>
                     <button onClick={() => onDeleteAll()}>전체 삭제</button>
 
