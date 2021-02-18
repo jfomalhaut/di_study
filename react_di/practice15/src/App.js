@@ -5,7 +5,6 @@ import { Container, Cart, CartHeader, CartList, CartItem, ItemTotal, Products, P
 const NumberRegex = /[0-9]$/;
 
 const App = () => {
-
     const [list, setList] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
