@@ -6,4 +6,4 @@ import Scroll from './routers/Scroll';
 
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Reducer />, document.getElementById('root'));
