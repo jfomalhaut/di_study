@@ -9,18 +9,12 @@ const INCREASEMENT = 'INCREASEMENT';
 const DECREASEMENT = 'DECREASEMENT';
 const INPUT = 'INPUT';
 
-const ADD_TO_CART = "ADD_TO_CART";
-const DELETE_FROM_CART = "DELETE_FROM_CART"
-const INCREASE_QTY = "INCREASE_QTY"
 
 // Actions 일을 시키는 행위
 const onIncreasement = () => ({ type: INCREASEMENT });
 const onDecreasement = () => ({ type: DECREASEMENT });
 const onInput = (add) => ({ type: INPUT, addNumber: add });
 
-const onAdd = () => ({ type: ADD_TO_CART });
-const onDelete = () => ({ type: DELETE_FROM_CART });
-const onIncrease = () => ({ type: INCREASE_QTY });
 
 // 하청, 일을 직접적으로 하는 주체
 const CounterReducer = (state, action) => {
@@ -40,19 +34,7 @@ const CounterReducer = (state, action) => {
     }
 };
 
-const CartReducer = (state, action) => {
-    switch (action.type) {
-        case ADD_TO_CART: {
-            return state
-        }
-        case DELETE_FROM_CART: {
-            return state
-        }
-        case INCREASE_QTY: {
-            return state;
-        }
-    }
-}
+
 
 
 const Counter2 = () => {
@@ -78,21 +60,6 @@ const Counter2 = () => {
     };
 
 
-    const CartControl = () => {
-        const [cart, dispatch] = useReducer(CartReducer, []);
-
-        const addToCart = () => {
-            dispatch({ type: 'ADD_TO_CART' })
-        };
-
-
-    }
-
-
-
-
-
-
 
     return (
         <div>
@@ -108,11 +75,8 @@ const Counter2 = () => {
                 <div className="box">
                     <Cart>
                         <h3>카트</h3>
-
                     </Cart>
-
                     <GroceryContainer>
-
                         {Grocery.map(item => (
                             <GroceryItem key={item.id}>
                                 <h1>{item.name}</h1>
@@ -122,18 +86,14 @@ const Counter2 = () => {
                         ))}
                     </GroceryContainer>
                 </div>
-
-
             </GroceryCart>
-
-
         </div>
 
     );
 };
 
 export default Counter2;
-export default CartControl;
+
 
 
 

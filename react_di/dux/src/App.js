@@ -13,7 +13,6 @@ const App = () => {
                 <Route path="/list" component={List} />
                 <Route path="/detail" component={Detail} />
             </Switch>
-
         </BrowserRouter>
     )
 }

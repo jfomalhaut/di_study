@@ -4,9 +4,17 @@ import { Container, Cart, CartHeader, CartList, CartItem, ItemTotal, Products, P
 
 const NumberRegex = /[0-9]$/;
 
+const nf = new Intl.NumberFormat();
+
 const App = () => {
     const [list, setList] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [totalItems, setTotalItems] = useState(0);
+
+    const comma = (num) => {
+        return nf.format(num);
+    };
+
 
     const onAdd = (id) => {
         const selectedItem = Items.filter(item => item.id === id)[0]
@@ -30,8 +38,11 @@ const App = () => {
     };
 
     useEffect(() => {
-        const total = list.reduce((acc, cur, idx) => (acc + cur.price * cur.quantity), 0);
-        setTotalPrice(total);
+        const price = list.reduce((acc, cur, idx) => (acc + cur.price * cur.quantity), 0);
+        setTotalPrice(price);
+
+        const items = list.reduce((acc, cur, idx) => (acc + cur.quantity * 1), 0)
+        setTotalItems(items);
     }, [list]);
 
     // useEffect(() => {
@@ -73,8 +84,8 @@ const App = () => {
                                 />
                                 <b>개</b>
                             </div>
-                            <h3>총 {item.price}원</h3>
-                            <p>(개당 {item.price}원)</p>
+                            <h3>총 {comma(item.price * item.quantity)}원</h3>
+                            <p>(개당 {comma(item.price)}원)</p>
                             <div className="buttonBox">
                                 <button onClick={() => onDeleteItem(item.id)}>현재 항목 삭제</button>
                             </div>
@@ -82,9 +93,11 @@ const App = () => {
                     ))}
                 </CartList>
                 <ItemTotal>
-                    <h2>총 합계: {list.length} 개</h2>
-                    <h2>총 액수: {totalPrice} 원</h2>
-                    <button onClick={() => onDeleteAll()}>전체 삭제</button>
+                    <div className="totalBox">
+                        <h2>총 합계: {totalItems} 개</h2>
+                        <h2>총 액수: {comma(totalPrice)} 원</h2>
+                        <button onClick={() => onDeleteAll()}>전체 삭제</button>
+                    </div>
 
                 </ItemTotal>
             </Cart>
@@ -92,7 +105,7 @@ const App = () => {
                 {Items.map(item => (
                     <Product key={item.id}>
                         <h1>{item.name}</h1>
-                        <p>{item.price}원</p>
+                        <p>{comma(item.price)}원</p>
                         <button onClick={() => onAdd(item.id)}>1개 담기</button>
                     </Product>
                 ))}

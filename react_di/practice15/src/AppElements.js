@@ -59,6 +59,7 @@ text-align: center;
 .inputBox {
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
 
 }
 
@@ -82,11 +83,13 @@ h2 {
     font-size: 3rem;
 }
 
+h3 {
+    margin-bottom: 5px;
+}
 
-
-
-
-
+p {
+    margin-bottom: 5px;
+}
 
 `;
 
@@ -99,13 +102,18 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 
+.totalBox {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-button {
-    width: 150px;
 }
 
 
-
+button {
+    width: 100px;
+}
 
 `;
 

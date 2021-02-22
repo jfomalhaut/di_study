@@ -8,7 +8,7 @@ const CounterReducer = (state = initialState, action) => {
         case 'INCREASEMENT': {
             return {
                 ...state,
-                count: state.conut + 1
+                count: state.count + 1
             };
         }
         default: {
