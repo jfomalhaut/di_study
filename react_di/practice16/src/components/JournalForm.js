@@ -2,9 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Note, Button } from './styles/JournalFormElements'
 
 const JournalForm = (props) => {
-    const [title, setTitle] = useState(props.edit ? props.edit.value : '');
-    const [main, setMain] = useState(props.edit ? props.edit.value : '');
+    const [title, setTitle] = useState('');
+    const [main, setMain] = useState('');
+    // const [title, setTitle] = useState(props.edit ? props.edit.value : '');
+    // const [main, setMain] = useState(props.edit ? props.edit.value : '');
 
+    useEffect(() => {
+        setTitle(props.info.title);
+        setMain(props.info.main);
+    }, [props.info]);
 
     const handleTitleChange = e => {
         setTitle(e.target.value);
@@ -15,6 +21,11 @@ const JournalForm = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        if (props.info.id > 0) { // 수정일 때
+
+        } else { // 새로 작성
+
+        }
         props.onSubmit({
             id: Math.floor(Math.random() * 10000),
             title: title,
@@ -54,7 +65,8 @@ const JournalForm = (props) => {
                     </div>
                     <Button>
                         <button onClick={handleSubmit}>
-                            Submit</button>
+                            Submit
+                        </button>
                     </Button>
                 </form>
 

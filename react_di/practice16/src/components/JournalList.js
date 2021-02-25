@@ -3,10 +3,16 @@ import Journal from './Journal'
 import JournalForm from './JournalForm'
 import { Container } from './styles/JournalListElements'
 
+const _info = {
+    id: 0,
+    title: '',
+    main: '',
+};
 
 const JournalList = () => {
 
     const initialState = JSON.parse(localStorage.getItem('journals')) || []
+    const [updateInfo, setUpdateInfo] = useState(_info)
 
 
     const [journals, setJournals] = useState(initialState);
@@ -33,20 +39,25 @@ const JournalList = () => {
         setJournals(prev => prev.map(item => (item.id === journalId ? newValue : item)));
     };
 
+    const tempUpdate = (data) => {
+        setUpdateInfo(data);
+    };
 
-
-
+    useEffect(() => {
+        console.log(updateInfo);
+    }, [updateInfo]);
 
 
 
     return (
         <>
             <Container>
-                <JournalForm onSubmit={addJournal} />
+                <JournalForm info={updateInfo} onSubmit={addJournal} />
                 <Journal
                     journals={journals}
                     removeJournal={removeJournal}
                     updateJournal={updateJournal}
+                    tempUpdate={tempUpdate}
                 />
             </Container>
         </>

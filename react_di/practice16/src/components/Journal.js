@@ -3,7 +3,8 @@ import { JournalSection, JournalItem } from './styles/JournalElements'
 import JournalForm from './JournalForm'
 
 
-const Journal = ({ journals, removeJournal, updateJournal }) => {
+const Journal = (props) => {
+    const { journals, removeJournal, updateJournal, tempUpdate } = props;
 
 
     const DateTime = () => {
@@ -49,7 +50,9 @@ const Journal = ({ journals, removeJournal, updateJournal }) => {
                         <p>{journal.main}</p>
                         <div className="journal-buttons">
                             <button onClick={() => removeJournal(journal.id)}>Delete</button>
-                            <button onClick={() => setEdit({ id: journal.id, title: journal.title, main: journal.main })} >update</button>
+                            {/* <button onClick={() => setEdit({ id: journal.id, title: journal.title, main: journal.main })} >update</button> */}
+                            {/* <button onClick={() => setEdit(journals)} >update</button> */}
+                            <button onClick={() => tempUpdate(journal)} >update</button>
                         </div>
 
                     </JournalItem>
