@@ -29,7 +29,7 @@ function App() {
 
                 </Switch>
             </main>
-        </Router >
+        </Router>
 
     );
 };
