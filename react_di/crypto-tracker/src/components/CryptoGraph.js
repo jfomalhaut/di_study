@@ -5,8 +5,10 @@ import { Line, defaults } from 'react-chartjs-2'
 import {
     Container,
     ContainerBox,
-    Chart
-} from './CryptoGraphElements';
+    Chart,
+    Article,
+    Articles
+} from '../styles/CryptoGraphElements';
 import moment from 'moment';
 
 defaults.global.tooltips.enabled = true
@@ -32,6 +34,7 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
     const [title, setTitle] = useState('');
     const [updatedDate, setUpdatedDate] = useState('');
     const [lastPrice, setLastPrice] = useState(0);
+    const [articles, setArticles] = useState([])
 
     const [chartData, setChartData] = useState(_dataInfo);
 
@@ -39,7 +42,7 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
         const url = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=90&interval=daily`;
         axios.get(url).then(res => {
             const { data: { prices } } = res;
-            const newPrices = prices.map(item => ({ date: item[0], price: item[1]}));
+            const newPrices = prices.map(item => ({ date: item[0], price: item[1] }));
             const _info = {
                 ...chartData,
                 labels: newPrices.map(item => moment(item.date).format('YY/MM/DD')),
@@ -56,29 +59,49 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
         });
     };
 
+    const getCoinDetail = () => {
+        const url = `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=true&market_data=false&community_data=false&developer_data=false`;
+        axios.get(url).then(res => {
+            const data = res.data
+
+            console.log(data)
+            setCryptos(data)
+            setLogo(data.image.small)
+            setTitle(data)
+            setLastPrice(data.tickers[0].last)
+        })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
+
+    const getNews = () => {
+        const url = `https://newsapi.org/v2/everything?language=en&pageSize=10&page=5&q=${id}&apiKey=26d1a58437c6469185b8094acc9bbfc0`;
+        axios.get(url).then(res => {
+            console.log(res.data)
+            const data = res.data.articles;
+            setArticles(data)
+
+        })
+    }
+
     useEffect(() => {
         getCoinInfo();
     }, [id]);
 
-    // useEffect(() => {
+    useEffect(() => {
+        getCoinDetail();
+    }, [id]);
 
-    //     axios
-    //         .get(
-    //             `https://api.coingecko.com/api/v3/coins/${match.params.id}?localization=false&tickers=true&market_data=false&community_data=false&developer_data=false`
-    //         )
-    //         .then(res => {
-    //             const data = res.data
-    //             console.log(data)
-    //             // console.log(data.market_cap_rank)
-    //             setLogo(data.image.small)
-    //             setTitle(data)
-    //             setUpdatedDate(data)
-    //             setLastPrice(data.tickers[0].last)
+    useEffect(() => {
+        getNews();
+    }, [id]);
 
-    //         })
-    //         .catch(error => console.log(error));
 
-    // }, []);
+
+
+
 
 
     // useEffect(() => {
@@ -104,10 +127,24 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
 
     // }, [date, price]);
 
-    const handleChange = e => {
+
+    const initialState = JSON.parse(localStorage.getItem('coins')) || []
+
+    const [cryptos, setCryptos] = useState(initialState);
+
+    useEffect(() => {
+        localStorage.setItem('cryptos', JSON.stringify(cryptos))
+    }, [cryptos])
+
+    const addCrypto = crypto => {
+        const newCryptos = [...cryptos, crypto];
+        setCryptos(newCryptos);
+        console.log(...cryptos)
+    }
 
 
-    };
+
+
 
     const options = {
         maintainAspectRatio: true,
@@ -145,15 +182,8 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
                 <p>{updatedDate.last_updated}</p>
                 <p>{lastPrice}</p>
 
-                <label > Save to My Cryptos</label>
-                <input
-                    onChange={handleChange}
-                    type="checkbox"
-                    name=""
-                    value={match.params.id}
-
-                />
-
+                <label>Save to My Cryptos</label>
+                <button onClick={() => addCrypto()} >Add to my List</button>
 
                 <Chart>
                     <Line
@@ -165,8 +195,26 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
                 </Chart>
 
             </ContainerBox>
+            <h1>Related news</h1>
+            <Articles>
 
-        </Container >
+                {articles.map((item, index) => (
+                    <Article key={`article${index}`}>
+                        <a href={item.url}>
+                            <h1>{item.title}</h1>
+                            <h5>{item.publishedAt.slice(0, 10)}</h5>
+                            <h4>{item.author}</h4>
+                            <img src={item.urlToImage}></img>
+                            <div className="content">
+                                <p>{item.content}...</p>
+                            </div>
+                            <b>Click Detail</b>
+                        </a>
+                    </Article>
+                ))}
+            </Articles>
+
+        </Container>
     )
 }
 
@@ -176,11 +224,11 @@ export default CryptoGraph
 
 
 
-// 1. »ó´Ü¿¡´Â ÄÚÀÎ ¸®½ºÆ®°¡ Ãâ·ÂÀÌ µÈ´Ù.
-// 	- »ó´Ü¿¡¼­ µ¥ÀÌÅÍ ¹Þ¾Æ¿Í¼­ ³ëÃâ: axios·Î ºÒ·¯¿Â´Ù.
-// 2. ÄÚÀÎ¸®½ºÆ®¸¦ Å¬¸¯ÇÏ¸é ÇØ´ç ÄÚÀÎ¿¡ ´ëÇÑ Â÷Æ®°¡ Ãâ·ÂµÈ´Ù.
-// 3. ÄÚÀÎ ¸®½ºÆ®¸¦ Å¬¸¯ÇÒ ¶§ urlÀÌ ¹Ù²ï´Ù.
-// 	- Å¬¸¯½Ã urlÀÌ ¹Ù²î¹Ç·Î /:id, App¿¡¼­ ÄÚÀÎ ÀÌ¸§À» º¯¼ö·Î µî·ÏÇØÁØ´Ù.
-// 4. urlÀÌ """¹Ù²ð ¶§¸¶´Ù""" Â÷Æ®°¡ ¹Ù²ï´Ù.
-// 	- useEffect»ç¿ëÇÑ´Ù. ÀÛ¿ë º¯¼ö => url, 
-// 	- useEffect°¡ µ¿ÀÛÇÒ ¶§¸¶´Ù »õ·Î¿î µ¥ÀÌÅÍ¸¦ ºÒ·¯¼­ chart¿¡ ´ã¾ÆÁØ´Ù.
+// 1. ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È´ï¿½.
+// 	- ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½: axiosï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Â´ï¿½.
+// 2. ï¿½ï¿½ï¿½Î¸ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ÂµÈ´ï¿½.
+// 3. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ urlï¿½ï¿½ ï¿½Ù²ï¿½ï¿½.
+// 	- Å¬ï¿½ï¿½ï¿½ï¿½ urlï¿½ï¿½ ï¿½Ù²ï¿½Ç·ï¿½ /:id, Appï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+// 4. urlï¿½ï¿½ """ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½""" ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½.
+// 	- useEffectï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ => url, 
+// 	- useEffectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ chartï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.

@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard'
 import Home from './components/Home';
 import CryptoGraph from './components/CryptoGraph';
 import Navbar from './components/Navbar';
+import CoinList from './components/CoinList';
 
 
 
@@ -20,6 +21,7 @@ const App = () => {
             <Switch>
                 <Route path='/' exact component={Home} />
                 <Route path='/coin/:id' component={CryptoGraph} />
+                <Route path='/mycrypto' component={CoinList} />
             </Switch>
 
 

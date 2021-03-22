@@ -12,7 +12,7 @@ import {
     CoinPlus,
     MarketCap
 
-} from './CoinElements';
+} from '../styles/CoinElements';
 
 const Coin = ({
     graph,

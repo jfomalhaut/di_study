@@ -14,7 +14,7 @@ import {
     Container,
     Search,
     Coins
-} from './DashboardElements';
+} from '../styles/DashboardElements';
 
 SwiperCore.use([Navigation, Keyboard]);
 
@@ -22,6 +22,8 @@ const Dashboard = () => {
 
     const [coins, setCoins] = useState([]);
     const [search, setSearch] = useState('');
+
+
 
     useEffect(() => {
 
@@ -71,10 +73,9 @@ const Dashboard = () => {
                     onSlideChange={() => console.log('slide change')}
                     onSwiper={(swiper) => console.log(swiper)}
                 >
-                    {filteredCoins.map(coin => {
-                        return (<SwiperSlide>
+                    {filteredCoins.map((coin, index) => {
+                        return (<SwiperSlide key={index}>
                             <Coin
-                                key={coin.id}
                                 graph={`/coin/${coin.id}`}
                                 name={coin.name}
                                 price={coin.current_price}

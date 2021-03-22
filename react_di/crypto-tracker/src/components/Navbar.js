@@ -1,5 +1,5 @@
 import React from 'react'
-import { Nav, NavOptions } from './NavbarElements'
+import { Nav, NavOptions } from '../styles/NavbarElements'
 import { Link } from 'react-router-dom'
 
 
