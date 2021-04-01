@@ -8,9 +8,10 @@ const ADJUST_ITEM_QTY = 'ADJUST_ITEM_QTY';
 const addToCart = (item) => ({ type: ADD_TO_CART, item });
 const removeItem = (id) => ({ type: REMOVE_ITEM, id });
 const removeAll = () => ({ type: REMOVE_ALL });
-const adjustQty = (id) => ({ type: ADJUST_ITEM_QTY, id });
+const adjustQty = (data) => ({ type: ADJUST_ITEM_QTY, data });
 
 export default {
+    ADJUST_ITEM_QTY,
     ADD_TO_CART,
     REMOVE_ITEM,
     REMOVE_ALL,

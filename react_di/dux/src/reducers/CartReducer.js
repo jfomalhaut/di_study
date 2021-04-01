@@ -34,11 +34,14 @@ const CartReducer = (state = INITIAL_STATE, action) => {
             }
         }
         case ADJUST_ITEM_QTY:
+            console.log('dd');
+            console.log(action);
+            const { id, value } = action.data;
             return {
                 ...state,
                 cart: state.cart.map((item) =>
-                    item.id === action.id
-                        ? { ...item, qty: +action.qty }
+                    item.id === id
+                        ? ({ ...item, qty: value })
                         : item
                 ),
             };
