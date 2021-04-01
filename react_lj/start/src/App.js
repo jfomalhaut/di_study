@@ -6,7 +6,7 @@ import Counter from './routers/Counter';
 import Phonebook from './routers/Phonebook';
 import Address from './routers/Address';
 import Product from './routers/Product';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Header } from './components';
 import Temp from './routers/Temp';
 
@@ -15,6 +15,7 @@ function App() {
 		<Router>
 			<GlobalStyles />
 			<Header />
+			<Loading />
 			<main style={{ paddingTop: '92px' }}>
 				<Switch>
 					<Route path="/temp" component={Temp} />
@@ -33,6 +34,15 @@ function App() {
 };
 
 export default App;
+
+const Loading = styled.div`
+	border: 5px solid #f0f0f0;
+	border-right: 5px solid dodgerblue;
+	border-top: 5px solid dodgerblue;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+`;
 
 const GlobalStyles = createGlobalStyle`
 	* { margin: 0; padding: 0; box-sizing: border-box; list-style: none;}
