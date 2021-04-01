@@ -21,9 +21,9 @@ const JournalForm = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (props.info.id > 0) { // ¼öÁ¤ÀÏ ¶§
+        if (props.info.id > 0) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
-        } else { // »õ·Î ÀÛ¼º
+        } else { // ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 
         }
         props.onSubmit({

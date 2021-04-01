@@ -14,7 +14,6 @@ const JournalList = () => {
     const initialState = JSON.parse(localStorage.getItem('journals')) || []
     const [updateInfo, setUpdateInfo] = useState(_info)
 
-
     const [journals, setJournals] = useState(initialState);
 
     useEffect(() => {
@@ -23,19 +22,16 @@ const JournalList = () => {
 
     const addJournal = journal => {
         const newJournals = [...journals, journal];
-
         setJournals(newJournals);
         console.log(...journals)
     }
 
     const removeJournal = id => {
         const removedArr = [...journals].filter(journal => journal.id !== id);
-
         setJournals(removedArr);
     };
 
     const updateJournal = (journalId, newValue) => {
-
         setJournals(prev => prev.map(item => (item.id === journalId ? newValue : item)));
     };
 
@@ -44,7 +40,7 @@ const JournalList = () => {
     };
 
     useEffect(() => {
-        console.log(updateInfo);
+        console.log("updateInfo", updateInfo);
     }, [updateInfo]);
 
 

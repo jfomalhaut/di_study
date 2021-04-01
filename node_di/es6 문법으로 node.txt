@@ -1,0 +1,12 @@
+babel 설치
+
+1.@babel/cli
+2.@babel/core
+3.@babel/node
+4.@babel/polyfill
+5.@babel/preset-env
+6. babel-loader
+
+npm i -D 위에 것들 설치
+
+package.json 에서 설치되었는지 확인
