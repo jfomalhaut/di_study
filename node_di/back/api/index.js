@@ -30,7 +30,6 @@ router.post('/signin', (req, res, next) => {
             }, process.env.JWT_SECRET, {
                 expiresIn: '1h'
             });
-            console.log
             res.cookie('user', 'token');
             return res.status(201).json({
                 user,
