@@ -7,4 +7,4 @@ import Cart from './routers/Cart';
 
 
 
-ReactDOM.render(<Cart />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

@@ -9,6 +9,7 @@ import Product from './routers/Product';
 import { createGlobalStyle } from 'styled-components';
 import Header from './components/Header';
 import Temp from './routers/Temp';
+import styled from 'styled-components'
 
 function App() {
     return (
@@ -33,6 +34,8 @@ function App() {
 
     );
 };
+
+
 
 export default App;
 

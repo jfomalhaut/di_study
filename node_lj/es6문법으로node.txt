@@ -1,0 +1,12 @@
+A. babel??
+
+1. @babel/cli
+2. @babel/core
+3. @babel/node
+4. @babel/polyfill
+5. @babel/preset-env
+6. babel-loader
+
+npm i -D @babel/cli @babel/core @babel/node @babel/polyfill @babel/preset-env babel-loader
+
+B. package.json type? babel??? ???.

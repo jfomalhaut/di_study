@@ -9,14 +9,9 @@ const Navbar = () => {
             <Link to="/">
                 <h1>Crypto Tracker</h1>
             </Link>
-            <NavOptions>
-                <Link to="/">
-                    <p>My Cryptos</p>
-                </Link>
-
-            </NavOptions>
-
-
+            <p>
+                Get the latest news on crypto currencies!
+            </p>
         </Nav>
     )
 }

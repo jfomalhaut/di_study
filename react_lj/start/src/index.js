@@ -6,4 +6,4 @@ import Scroll from './routers/Scroll';
 import Reducer from './routers/Reducer';
 import Cart from './routers/Cart';
 
-ReactDOM.render(<Cart />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

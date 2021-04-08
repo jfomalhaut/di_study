@@ -1,0 +1,14 @@
+1. npm init -y
+프로젝트 init
+
+2. express, cors, dotenv 설치
+
+3. server.js 작성
+
+4. cors 처리
+
+5. express.json(); => post/body 
+
+6. api require
+
+7. get일때는 query 혹은 params를 사용
