@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { GlobalContext } from '../context/GlobalState'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { useRouteMatch } from 'react-router-dom'
 import { Line, defaults } from 'react-chartjs-2'
+
 
 import {
     Container,
@@ -26,11 +28,11 @@ const _dataInfo = {
     ]
 };
 
-const CryptoGraph = ({ match: { params: { id } } }) => {
-
-    const match = useRouteMatch();
+const CryptoGraph = ({ match }) => {
 
 
+    let params = match.params;
+    const [cryptos, setCryptos] = useState([]);
     const [logo, setLogo] = useState('');
     const [title, setTitle] = useState('');
     const [updatedDate, setUpdatedDate] = useState('');
@@ -38,10 +40,20 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
     const [articles, setArticles] = useState([])
     const [chartData, setChartData] = useState(_dataInfo);
 
+    // Default value for days in order to get graph values
+    const [days, setDays] = useState(30)
 
 
-    const getCoinInfo = () => {
-        const url = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=90&interval=daily`;
+    const { addCoinToMylist, mylist } = useContext(GlobalContext);
+
+    let storedCoin = mylist.find((item) => item.id === cryptos.id);
+    const mylistDisabled = storedCoin ? true : false;
+
+
+    const getCoinInfo = (newDays) => {
+
+
+        const url = `https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=${newDays}&interval=daily`;
         axios.get(url).then(res => {
             const { data: { prices } } = res;
             const newPrices = prices.map(item => ({ date: item[0], price: item[1] }));
@@ -56,6 +68,9 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
                 ]
             };
             setChartData(_info);
+
+
+
         }).catch(error => {
             console.log(error);
         });
@@ -64,10 +79,9 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
 
 
     const getCoinDetail = async () => {
-        const url = `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=true&market_data=false&community_data=false&developer_data=false`;
+        const url = `https://api.coingecko.com/api/v3/coins/${params.id}?localization=false&tickers=true&market_data=false&community_data=false&developer_data=false`;
         await axios.get(url).then(res => {
             const data = res.data
-
             console.log(data)
             setCryptos(data)
             setLogo(data.image.small)
@@ -81,7 +95,7 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
 
 
     const getNews = async () => {
-        const url = `https://newsapi.org/v2/everything?language=en&pageSize=10&page=5&q=${id}&apiKey=26d1a58437c6469185b8094acc9bbfc0`;
+        const url = `https://newsapi.org/v2/everything?language=en&pageSize=10&page=5&q=${params.id}&apiKey=26d1a58437c6469185b8094acc9bbfc0`;
         await axios.get(url).then(res => {
             console.log(res.data)
             const data = res.data.articles;
@@ -93,29 +107,17 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
     }
 
     useEffect(() => {
-        getCoinInfo();
-    }, [id]);
+        getCoinInfo(days);
+
+    }, [params.id]);
 
     useEffect(() => {
         getCoinDetail();
-    }, [id]);
+    }, [params.id]);
 
     useEffect(() => {
         getNews();
-    }, [id]);
-
-
-
-
-    const initialState = JSON.parse(localStorage.getItem('coins')) || []
-
-    const [cryptos, setCryptos] = useState(initialState);
-
-    useEffect(() => {
-        localStorage.setItem('cryptos', JSON.stringify(cryptos))
-    }, [cryptos])
-
-
+    }, [params.id]);
 
 
 
@@ -149,14 +151,36 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
 
     return (
         <Container>
+
             <ContainerBox>
-                <img src={logo} />
+                <div>
+                    <img src={logo} />
+                    <h1>{title.name}</h1>
+                    <p>{updatedDate.last_updated}</p>
+                    <p>${lastPrice}</p>
 
-                <h1>{title.name}</h1>
-                <p>{updatedDate.last_updated}</p>
-                <p>{lastPrice}</p>
+                    <button
+                        disabled={mylistDisabled}
+                        onClick={() => addCoinToMylist(cryptos)}
+                        className="save__btn"
+                    >
+                        {storedCoin ? <b>Already Saved</b>
+                            :
+                            <b>Save to My Cryptos</b>
+                        }
 
-                <label>Save to My Cryptos</label>
+                    </button>
+                </div>
+                <div>
+                    <button className="days__btn" onClick={() => getCoinInfo(7)}>7D</button>
+                    <button className="days__btn" onClick={() => getCoinInfo(14)}>14D</button>
+                    <button className="days__btn" onClick={() => getCoinInfo(30)}>30D</button>
+                    <button className="days__btn" onClick={() => getCoinInfo(90)}>90D</button>
+                    <button className="days__btn" onClick={() => getCoinInfo(180)}>6M</button>
+                    <button className="days__btn" onClick={() => getCoinInfo('max')}>Max</button>
+
+                </div>
+
 
 
                 <Chart>
@@ -168,6 +192,11 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
                     />
                 </Chart>
 
+            </ContainerBox>
+            <ContainerBox>
+                <h2>About {cryptos.name}</h2>
+                {/* <p>{cryptos.description.en}</p> */}
+                <p>{cryptos.public_notice}</p>
             </ContainerBox>
             <h1>Related news</h1>
             <p>Click articles to see detail...</p>
@@ -181,7 +210,7 @@ const CryptoGraph = ({ match: { params: { id } } }) => {
                             <p>{item.author}</p>
                             <img src={item.urlToImage}></img>
                             <div className="content">
-                                <p style={{ fontSize: "0.7rem" }}>{item.content}...</p>
+                                <p style={{ fontSize: "0.7rem" }}>{item.content.slice(0, 150)}...</p>
                             </div>
 
                         </a>

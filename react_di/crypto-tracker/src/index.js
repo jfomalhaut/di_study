@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { GlobalProvider } from "./context/GlobalState";
 
 
 ReactDOM.render(
-    <Router>
+    <GlobalProvider>
         <App />
-    </Router>,
+    </GlobalProvider>,
     document.getElementById('root')
 );

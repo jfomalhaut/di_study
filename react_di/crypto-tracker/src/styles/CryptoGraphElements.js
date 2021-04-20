@@ -22,6 +22,31 @@ border-radius: 25px;
 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 padding: 40px 20px;
 
+.save__btn{
+    background:none;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.save__btn:hover{
+    text-decoration: underline;
+}
+
+.days__btn{
+    background: none;
+    outline:none;
+    border: none;
+    cursor: pointer;
+    margin-right: 0.3rem;
+}
+
+.days__btn:hover{
+    text-decoration: underline;
+}
+
 
 `;
 
@@ -39,11 +64,10 @@ export const Articles = styled.div`
 
 
 width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
     align-items: center;
-    grid-gap: 10px;
-    padding: 2rem;
+
+    overflow: auto;
 
 `;
 
@@ -51,7 +75,7 @@ width: 100%;
 export const Article = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 50rem;
     height: auto;
     padding: 20px;
     transition: all 0.2s ease-in-out;
@@ -64,7 +88,7 @@ export const Article = styled.div`
 
 
     img {
-width: 100%;    
+width: 20rem;    
         height: 200px;
         object-fit: fill;
         object-position: top;

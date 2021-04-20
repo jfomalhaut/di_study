@@ -16,11 +16,15 @@ export const Container = styled.div`
 `;
 
 export const Search = styled.div`
-margin-bottom: 2.5rem;
+margin: 2rem 0rem;
 width: 100%;
+justify-content: center;
+display: flex;
+flex-direction: column;
+align-items: center;
 
 input {
-    width: 300px;
+    width: 400px;
     height: 50px;
     border-radius: 25px;
     padding: 20px;
@@ -34,8 +38,8 @@ display:flex;
 justify-content: center;
 width: 95%;
 overflow: auto;
-padding-bottom: 20px;
-border-bottom: 5px solid gray;
+
+
 
 
 

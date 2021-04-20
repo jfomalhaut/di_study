@@ -1,17 +1,20 @@
 import React from 'react'
-import { Nav, NavOptions } from '../styles/NavbarElements'
+import { Nav } from '../styles/NavbarElements'
 import { Link } from 'react-router-dom'
+
 
 
 const Navbar = () => {
     return (
         <Nav>
             <Link to="/">
-                <h1>Crypto Tracker</h1>
+
+                <h1 className="logo">My Crypto World</h1>
             </Link>
-            <p>
-                Get the latest news on crypto currencies!
-            </p>
+            <Link to="/" className="mylist-nav">
+                <h4>My Coin List</h4>
+            </Link>
+
         </Nav>
     )
 }

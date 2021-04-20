@@ -53,6 +53,8 @@ const Dashboard = () => {
     return (
         <Container>
             <Search>
+                <h1 style={{ fontSize: "3rem" }}>Welcome to My Crypto world!</h1>
+                <h4 style={{ marginBottom: "1rem", color: "gray" }}>"Search any crypto currency and get the related news !"</h4>
                 <form>
                     <input
                         className='coin-input'
