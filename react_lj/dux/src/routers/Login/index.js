@@ -36,20 +36,19 @@ const Login = () => {
 	};
 
 	const checkAuthorization = async () => {
-
 		try {
-			 const result = await Axios.get('http://localhost:4000/api/test', {
-				  headers: {
-						'Authorization': `Bearer ${localStorage.getItem('token')}`,
-				  },
-				  withCredentials: true
-			 });
-			 console.log(result);
+			const result =  await Axios.get('http://localhost:4000/api/test', {
+				headers: {
+					'Authorization': `Bearer ${localStorage.getItem('token')}`,
+				},
+				withCredentials: true
+			});
+			console.log(result);
 		} catch {
-			 alert('실패');
+			alert('실패');
 		}
 
-  }
+	};
 
 	return (
 		<div>
