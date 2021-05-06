@@ -5,5 +5,6 @@ import Input from './routers/Input';
 import Scroll from './routers/Scroll';
 import Reducer from './routers/Reducer';
 import Cart from './routers/Cart';
+import Museum from './routers/Museum';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Museum />, document.getElementById('root'));
