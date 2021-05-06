@@ -28,6 +28,7 @@ const Header = () => {
 			<Link to="/product/all">Product</Link>
 			<Link to="/page1">Page1</Link>
 			<Link to="/page2/dlwns">Page2</Link>
+			<Link to="/museum">Museum</Link>
 		</HeaderComponent>
 	);
 };

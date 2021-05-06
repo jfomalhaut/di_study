@@ -7,4 +7,4 @@ import Reducer from './routers/Reducer';
 import Cart from './routers/Cart';
 import Museum from './routers/Museum';
 
-ReactDOM.render(<Museum />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

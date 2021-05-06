@@ -6,6 +6,7 @@ import Counter from './routers/Counter';
 import Phonebook from './routers/Phonebook';
 import Address from './routers/Address';
 import Product from './routers/Product';
+import Museum from './routers/Museum';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Header } from './components';
 import Temp from './routers/Temp';
@@ -21,6 +22,7 @@ function App() {
 					<Route path="/temp" component={Temp} />
 					<Route path="/address" component={Address} />
 					<Route path="/phonebook" component={Phonebook} />
+					<Route path="/museum" component={Museum} />
 					<Route path="/counter" component={Counter} />
 					<Route path="/product/:type" component={Product} />
 					<Route path="/page1" render={(props) => (

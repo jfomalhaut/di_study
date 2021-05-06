@@ -1,0 +1,33 @@
+1. 프론트에서 build를 한다. 
+	- bundle.js or bundle.min.js 과 index.html을 추출
+
+2. instance 생성 => linux, window, ubuntu 중 선택.. 운영체제 
+	- ec2 => linux
+	- 고유한 ip를 받게 됨.
+
+3. secret key 생성 (.pem, .ppk) 
+	- 용도, 파일질라, putty로 접속할 때 사용
+
+4. 터미널로 접속을 한다. ssh -i .... 접속할 때 사용
+
+5. 사용할 npm 혹은 yarn을 설치해준다.
+
+6. DB설치.
+
+7. package.json을 옮겨서 백앤드를 구성
+	- server.js
+	- package.json
+	- node_modules
+	- dist (1번에서 build한 파일 올리는 곳)
+
+8. pm2로 지속적으로 가동시켜준다.
+
+9. route53에서 호스팅 등록
+
+10. Certifaction => 인증서 등록
+	- 즉 내 도메인과 인스턴스를 연결한다.
+
+11. ALB Load Balancer => 교통정리
+	- https, 즉 포트번호 443을 사용 가능
+
+12. Auto Scaling => 차선의 확장
