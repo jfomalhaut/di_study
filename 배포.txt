@@ -31,3 +31,17 @@
 	- https, 즉 포트번호 443을 사용 가능
 
 12. Auto Scaling => 차선의 확장
+
+[키워드 통합]
+AWS 가입 => 인스턴스 임대(13.612.83.1) => 인스턴스에 npm,node / mysql 설치 (조금 어렵)
+=> node server를 구동 (pm2를 통해) => node에 mysql 라이브러리 설치 => 접근 => 쿼리문을 짜고 외부에서 접근 가능한 API화.
+
+준비물. 1.mySQL공부, 2.엑셀 데이터. 3.키워드/분야 (장르를 잡아서 새로운 분야의 데이터. 트랜디한 주제), 4. 기획 - 어떤 홈페이지인지(기능)
+
+sub도메인
+
+(vhost 라이브러리)
+dev.abc.com
+www.abc.com
+admin.abc.com
+shop.abc.com
