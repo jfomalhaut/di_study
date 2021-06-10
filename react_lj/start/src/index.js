@@ -6,5 +6,7 @@ import Scroll from './routers/Scroll';
 import Reducer from './routers/Reducer';
 import Cart from './routers/Cart';
 import Museum from './routers/Museum';
+import Search from './routers/Search';
+import Art from './routers/Art';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Art />, document.getElementById('root'));

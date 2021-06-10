@@ -9,4 +9,6 @@ router.get('/getArtist', factory.getArtist);
 // 아티스트에 맞는 그림 리스트
 router.get('/getPainting', factory.getPainting);
 
+router.post('/search', factory.search);
+
 module.exports = router;

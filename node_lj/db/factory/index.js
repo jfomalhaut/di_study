@@ -72,3 +72,27 @@ module.exports.getPainting = (req, res) => {
 		}
 	});
 };
+
+module.exports.search = (req, res) => {
+	const { body: { target, keyword, orderby } } = req;
+	const searchSQL = keyword === '' ? '' : `AND ${target} LIKE '%${keyword}%'`;
+	const orderBySQL = orderby === '' ? '' : `ORDER BY ${orderby}`;
+	sql = `
+		SELECT * FROM art_list
+		WHERE 1 = 1
+		${searchSQL}
+		${orderBySQL}
+	`;
+	conn.query(sql, (err, data) => {
+		if (err) {
+			res.status(500).send(false);
+		} else {
+			res.status(200).send(data);
+		}
+	});
+};
+
+// (artist like '%${keyword}%' OR
+// paiting_title like '%${keyword}%' OR
+// year like '%${keyword}%'  OR
+// artist_origin like '%${keyword}%' )
